@@ -7,8 +7,7 @@ import {
   TableRow,
 } from '@/components/ui/table'
 
-import { DataTablePagination } from '@/features/global/components/data-table/data-table-pagination'
-import { DataTableToolbar } from '@/features/global/components/data-table/data-table-toolbar'
+
 import {
   flexRender,
   getCoreRowModel,
@@ -26,6 +25,9 @@ import {
 } from '@tanstack/react-table'
 import { useState } from 'react'
 import type { TopicSection } from '../data/schema'
+import { DataTableToolbar } from './data-table-toolbar'
+import { DataTablePagination } from './data-table-pagination'
+
 
 
 declare module '@tanstack/react-table' {

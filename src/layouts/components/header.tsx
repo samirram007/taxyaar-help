@@ -12,11 +12,9 @@ export const Header = ({
   children,
   ...props
 }: HeaderProps) => {
-  const [offset, setOffset] = React.useState(0)
-
   React.useEffect(() => {
     const onScroll = () => {
-      setOffset(document.body.scrollTop || document.documentElement.scrollTop)
+      // Handle scroll event
     }
 
     // Add scroll listener to the body
@@ -27,20 +25,8 @@ export const Header = ({
   }, [])
 
   return (
-    <HeaderComponent />
-    // <header
-    //   className={cn(
-    //     'flex h-16 items-center gap-3 bg-background p-4 sm:gap-4',
-    //     fixed && 'header-fixed peer/header fixed z-50 w-[inherit] rounded-md',
-    //     offset > 10 && fixed ? 'shadow' : 'shadow-none',
-    //     className
-    //   )}
-    //   {...props}
-    // >
-    //   <SidebarTrigger variant='outline' className='scale-125 sm:scale-100' />
-    //   <Separator orientation='vertical' className='h-6' />
-    //   {children}
-    // </header>
+    <HeaderComponent {...props} />
+   
   )
 }
 

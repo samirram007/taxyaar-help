@@ -12,7 +12,8 @@ const HelpCentereLayout = () => {
         <>
 
             <Main className='min-h-screen grid grid-rows-[auto_1fr_auto]'>
-                <Header />
+                {headerVisible && <Header />}
+
                 <Outlet />
                 <Footer />
             </Main>

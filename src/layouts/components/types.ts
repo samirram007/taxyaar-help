@@ -24,20 +24,20 @@ interface BaseNavItem {
 }
 
 type NavLink = BaseNavItem & {
-  url: LinkProps['to']
+  url: LinkProps['to'] | string
   items?: never
 }
 
 type NavCollapsible = BaseNavItem & {
-  items: (BaseNavItem & { url: LinkProps['to'] })[]
-  url?: never
+  items: (BaseNavItem & { url: LinkProps['to'] | string })[]
+  url?: never | string
 }
 
 type NavItem = NavCollapsible | NavLink
 
 interface NavGroup {
   title: string
-  visible: boolean
+  visible: boolean 
   items: NavItem[]
 }
 interface Header {

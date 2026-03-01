@@ -22,7 +22,7 @@ import { lowerCase } from '../../../../utils/removeEmptyStrings'
 
 import { Loader2 } from 'lucide-react'
 
-import { addressSchema } from '../../address/data/schema'
+
 import { useUserMutation } from '../data/queryOptions'
 import { formSchema, type User, type UserForm } from '../data/schema'
 
@@ -54,7 +54,7 @@ export function ActionDialog({ currentRow, open, onOpenChange }: Props) {
         contactNo: '',
         phone: '',
         email: '',
-        address: addressSchema,
+        address: undefined,
         status: 'active',
         isEdit,
       },

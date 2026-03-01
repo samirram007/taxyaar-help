@@ -9,7 +9,7 @@ import HeaderComponent from './components/HeaderComponent'
 
 
 
-const AdminLayout = () => {
+const ProtectedLayout = () => {
     return (
         <SearchProvider>
 
@@ -58,4 +58,4 @@ const AdminLayout = () => {
     )
 }
 
-export default AdminLayout
+export default ProtectedLayout

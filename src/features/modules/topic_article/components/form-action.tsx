@@ -20,7 +20,7 @@ import { useForm } from 'react-hook-form'
 import slugify from 'slugify'
 import { useTopicArticleMutation } from '../data/queryOptions'
 import { formSchema, type TopicArticle, type TopicArticleForm } from '../data/schema'
-import RichTextEditor from './sub-component/rich-text-editor/index'
+
 import { TopicSectionCombobox } from './sub-component/topic_section-combo-box'
 
 import { Route as HelpCenterRouteTo } from '@/routes/help-center/_layout'
@@ -141,7 +141,7 @@ export function FormAction({ currentRow }: Props) {
                                 <div className="card min-h-64 w-full col-span-2">
 
                                     {/* <TiptapEditor form={form} /> */}
-                                    <RichTextEditor form={form} />
+
                                 </div>
                             </div>
 

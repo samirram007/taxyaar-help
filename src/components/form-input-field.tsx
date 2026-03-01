@@ -21,6 +21,7 @@ type Props = {
     type: InputType;
     name: string;
     label?: string;
+    noLabel?: boolean;
     options?: Option[];
     items?: { label: string; value: string }[];
     gapClass?: string;

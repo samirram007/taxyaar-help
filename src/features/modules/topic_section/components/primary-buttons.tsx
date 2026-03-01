@@ -10,7 +10,7 @@ export function PrimaryButtons() {
   return (
     <div className='flex gap-2'>
       <Button asChild className="space-x-1">
-        <Link to={TopicSectionDetailRoute.to} params={{ id: 'new' }}>
+        <Link to={TopicSectionDetailRoute.to} params={{ slug: 'new' }}>
           <span>Add Topic Section</span>
           <IconUserPlus size={18} />
         </Link>

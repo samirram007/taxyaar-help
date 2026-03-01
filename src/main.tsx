@@ -12,6 +12,7 @@ import { FontProvider } from './core/contexts/font-context'
 import { ThemeContextProvider } from './core/contexts/ThemeContextProvider'
 import { AuthProvider } from './features/auth/contexts/AuthContext'
 import './styles.css'
+import { TooltipProvider } from './components/ui/tooltip'
 
 
 
@@ -24,10 +25,13 @@ if (rootElement && !rootElement.innerHTML) {
       <TanstackQuery.Provider>
         <ThemeContextProvider defaultTheme="light" storageKey="vite-ui-theme">
           <FontProvider>
+            <TooltipProvider>
+
             <AuthProvider>
               <Toaster position="top-center" richColors />
               <AppRouter />
             </AuthProvider>
+            </TooltipProvider>
           </FontProvider>
         </ThemeContextProvider>
       </TanstackQuery.Provider>

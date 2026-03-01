@@ -15,6 +15,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as HelpCenterLayoutRouteImport } from './routes/help-center/_layout'
 import { Route as authSignInRouteImport } from './routes/(auth)/sign-in'
 import { Route as authOtpRouteImport } from './routes/(auth)/otp'
+import { Route as ProtectedUserIndexRouteImport } from './routes/protected/user/index'
 import { Route as HelpCenterLayoutIndexRouteImport } from './routes/help-center/_layout/index'
 import { Route as CategoriesCategoryIdIndexRouteImport } from './routes/categories/$categoryId/index'
 import { Route as CategoriesCategoryIdArticleIdRouteImport } from './routes/categories/$categoryId/$articleId'
@@ -117,6 +118,11 @@ const HelpCenterLayoutTopic_articleRoute =
     path: '/topic_article',
     getParentRoute: () => HelpCenterLayoutRoute,
   } as any)
+const ProtectedUserIndexRoute = ProtectedUserIndexRouteImport.update({
+  id: '/protected/user/',
+  path: '/protected/user/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HelpCenterLayoutIndexRoute = HelpCenterLayoutIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -198,6 +204,7 @@ export interface FileRoutesByFullPath {
   '/categories/$categoryId/$articleId': typeof CategoriesCategoryIdArticleIdRoute
   '/categories/$categoryId': typeof CategoriesCategoryIdIndexRoute
   '/help-center/': typeof HelpCenterLayoutIndexRoute
+  '/protected/user': typeof ProtectedUserIndexRoute
   '/help-center/topic_article': typeof HelpCenterLayoutTopic_articleLayoutRouteWithChildren
   '/help-center/topic_category': typeof HelpCenterLayoutTopic_categoryLayoutRouteWithChildren
   '/help-center/topic_section': typeof HelpCenterLayoutTopic_sectionLayoutRouteWithChildren
@@ -219,6 +226,7 @@ export interface FileRoutesByTo {
   '/signin': typeof authSigninLazyRoute
   '/categories/$categoryId/$articleId': typeof CategoriesCategoryIdArticleIdRoute
   '/categories/$categoryId': typeof CategoriesCategoryIdIndexRoute
+  '/protected/user': typeof ProtectedUserIndexRoute
   '/help-center/topic_article': typeof HelpCenterLayoutTopic_articleLayoutIndexRoute
   '/help-center/topic_category': typeof HelpCenterLayoutTopic_categoryLayoutIndexRoute
   '/help-center/topic_section': typeof HelpCenterLayoutTopic_sectionLayoutIndexRoute
@@ -240,6 +248,7 @@ export interface FileRoutesById {
   '/categories/$categoryId/$articleId': typeof CategoriesCategoryIdArticleIdRoute
   '/categories/$categoryId/': typeof CategoriesCategoryIdIndexRoute
   '/help-center/_layout/': typeof HelpCenterLayoutIndexRoute
+  '/protected/user/': typeof ProtectedUserIndexRoute
   '/help-center/_layout/topic_article': typeof HelpCenterLayoutTopic_articleRouteWithChildren
   '/help-center/_layout/topic_article/_layout': typeof HelpCenterLayoutTopic_articleLayoutRouteWithChildren
   '/help-center/_layout/topic_category': typeof HelpCenterLayoutTopic_categoryRouteWithChildren
@@ -267,6 +276,7 @@ export interface FileRouteTypes {
     | '/categories/$categoryId/$articleId'
     | '/categories/$categoryId'
     | '/help-center/'
+    | '/protected/user'
     | '/help-center/topic_article'
     | '/help-center/topic_category'
     | '/help-center/topic_section'
@@ -288,6 +298,7 @@ export interface FileRouteTypes {
     | '/signin'
     | '/categories/$categoryId/$articleId'
     | '/categories/$categoryId'
+    | '/protected/user'
     | '/help-center/topic_article'
     | '/help-center/topic_category'
     | '/help-center/topic_section'
@@ -308,6 +319,7 @@ export interface FileRouteTypes {
     | '/categories/$categoryId/$articleId'
     | '/categories/$categoryId/'
     | '/help-center/_layout/'
+    | '/protected/user/'
     | '/help-center/_layout/topic_article'
     | '/help-center/_layout/topic_article/_layout'
     | '/help-center/_layout/topic_category'
@@ -333,6 +345,7 @@ export interface RootRouteChildren {
   authSigninLazyRoute: typeof authSigninLazyRoute
   CategoriesCategoryIdArticleIdRoute: typeof CategoriesCategoryIdArticleIdRoute
   CategoriesCategoryIdIndexRoute: typeof CategoriesCategoryIdIndexRoute
+  ProtectedUserIndexRoute: typeof ProtectedUserIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -420,6 +433,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/help-center/topic_article'
       preLoaderRoute: typeof HelpCenterLayoutTopic_articleRouteImport
       parentRoute: typeof HelpCenterLayoutRoute
+    }
+    '/protected/user/': {
+      id: '/protected/user/'
+      path: '/protected/user'
+      fullPath: '/protected/user'
+      preLoaderRoute: typeof ProtectedUserIndexRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/help-center/_layout/': {
       id: '/help-center/_layout/'
@@ -650,6 +670,7 @@ const rootRouteChildren: RootRouteChildren = {
   authSigninLazyRoute: authSigninLazyRoute,
   CategoriesCategoryIdArticleIdRoute: CategoriesCategoryIdArticleIdRoute,
   CategoriesCategoryIdIndexRoute: CategoriesCategoryIdIndexRoute,
+  ProtectedUserIndexRoute: ProtectedUserIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

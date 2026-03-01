@@ -1,36 +1,38 @@
-import { DataTableRowActions } from "@/features/global/components/data-table/data-table-row-actions"
-import { useNavigate } from "@tanstack/react-router"
+
+
 import type { Row } from "@tanstack/react-table"
-import { useTopicCategory } from "../contexts/topic_category-context"
+
+
+
+
 import type { TopicCategory } from "../data/schema"
 
-import { Route as TopicCategoryDetailRoute } from '@/routes/help-center/_layout/topic_category/_layout/$id'
+
 
 interface DataTableRowActionsProps {
     row: Row<TopicCategory>
 }
 
 const RowActions = (props: DataTableRowActionsProps) => {
-    const navigate = useNavigate()
-    const { setOpen, currentRow, setCurrentRow } = useTopicCategory()
+    // const navigate = useNavigate()
+    // const { setOpen, currentRow, setCurrentRow } = useTopicCategory()
     const { row } = props
+    console.log(row)
     return (
-        <DataTableRowActions<TopicCategory>
-            row={row}
-            onEdit={(data) => {
-                setCurrentRow(data)
-                console.log("row Action: ", currentRow)
-                navigate({
-                    to: TopicCategoryDetailRoute.to,
-                    params: { id: data.id!.toString() },
-                })
-
-            }}
-            onDelete={(data) => {
-                setCurrentRow(data)
-                setOpen("delete")
-            }}
-        />
+        <div className="flex items-center gap-2">
+            {/* <Button variant="ghost" size="icon" onClick={() => {
+                setCurrentRow(row.original)
+                setOpen('edit')
+            }}>
+                <IconEdit size={16} />
+            </Button>
+            <Button variant="ghost" size="icon" onClick={() => {
+                setCurrentRow(row.original)
+                setOpen('delete')
+            }}>
+                <IconTrash size={16} />
+            </Button> */}
+        </div>
     )
 }
 

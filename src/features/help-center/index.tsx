@@ -3,36 +3,36 @@
 import Icon from "@/components/icon"
 import { Route as TopicCategoryRoute } from "@/routes/help-center/_layout/topic_category/_layout/$slug"
 import { Link } from "@tanstack/react-router"
-import { FaBook, FaChartLine, FaDatabase, FaQuestionCircle } from "react-icons/fa"
+// import { FaBook, FaChartLine, FaDatabase, FaQuestionCircle } from "react-icons/fa"
 import type { TopicCategoryList } from "../modules/topic_category/data/schema"
 import TopicSearch from "./components/topic-search"
-const categories01 = [
-    {
-        id: "tax-made-easy",
-        title: "Tax Made Easy",
-        description: "Understand tax concepts and filing requirements",
-        url: "/categories/tax-made-easy",
-        icon: FaChartLine,
-    },
-    {
-        id: "guides",
-        title: "How to Guides",
-        description: "Step-by-step instructions for common tasks",
-        icon: FaBook,
-    },
-    {
-        id: "knowledge",
-        title: "Knowledge Base",
-        description: "Comprehensive articles and documentation",
-        icon: FaDatabase,
-    },
-    {
-        id: "faqs",
-        title: "FAQs",
-        description: "Frequently asked questions and answers",
-        icon: FaQuestionCircle,
-    },
-]
+// const categories01 = [
+//     {
+//         id: "tax-made-easy",
+//         title: "Tax Made Easy",
+//         description: "Understand tax concepts and filing requirements",
+//         url: "/categories/tax-made-easy",
+//         icon: FaChartLine,
+//     },
+//     {
+//         id: "guides",
+//         title: "How to Guides",
+//         description: "Step-by-step instructions for common tasks",
+//         icon: FaBook,
+//     },
+//     {
+//         id: "knowledge",
+//         title: "Knowledge Base",
+//         description: "Comprehensive articles and documentation",
+//         icon: FaDatabase,
+//     },
+//     {
+//         id: "faqs",
+//         title: "FAQs",
+//         description: "Frequently asked questions and answers",
+//         icon: FaQuestionCircle,
+//     },
+// ]
 
 interface TopicCategoryProps {
     data: TopicCategoryList

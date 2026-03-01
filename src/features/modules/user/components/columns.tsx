@@ -7,9 +7,10 @@ import type { ColumnDef } from '@tanstack/react-table'
 
 
 import { ActiveInactiveStatusTypes } from '@/types/active-inactive-status'
-import { DataTableColumnHeader } from '../../../global/components/data-table/data-table-column-header'
+
 import type { User } from '../data/schema'
 import RowActions from './row-actions'
+import { DataTableColumnHeader } from '@/features/global/components/data-table/data-table-column-header'
 
 export const columns: ColumnDef<User>[] = [
   {

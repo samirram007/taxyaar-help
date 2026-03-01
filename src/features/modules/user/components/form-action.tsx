@@ -8,10 +8,10 @@ import {
 
 import FormInputField from '@/components/form-input-field'
 import { Dialog, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
-import { Route as UserRoute } from '@/routes/_authenticated/administration/_layout/user/_layout'
+
 import { lowerCase } from '@/utils/removeEmptyStrings'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useNavigate } from '@tanstack/react-router'
+
 import { Loader2 } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { useUserMutation } from '../data/queryOptions'
@@ -22,7 +22,7 @@ interface Props {
 }
 export function FormAction({ currentRow }: Props) {
     const isEdit = !!currentRow
-    const navigate = useNavigate();
+
 
     const { mutate: saveUser, isPending } = useUserMutation()
 
@@ -68,14 +68,8 @@ export function FormAction({ currentRow }: Props) {
     const onSubmit = (values: UserForm) => {
         console.log("here: ", values)
         form.reset()
-        saveUser(
-            currentRow ? { ...values, id: currentRow.id! } : values,
-            {
-                onSuccess: () => {
-                    navigate({ to: UserRoute.to, })
-                },
-            }
-        )
+        saveUser(values)
+
 
     }
 

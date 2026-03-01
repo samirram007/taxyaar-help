@@ -7,7 +7,7 @@ import {
   TableRow,
 } from '@/components/ui/table'
 
-import { DataTablePagination } from '@/features/global/components/data-table/data-table-pagination'
+
 
 import {
   flexRender,
@@ -27,6 +27,7 @@ import {
 import { useState } from 'react'
 import type { TopicArticle } from '../data/schema'
 import { DataTableToolbar } from './data-table-toolbar'
+import { DataTablePagination } from './data-table-pagination'
 
 
 declare module '@tanstack/react-table' {

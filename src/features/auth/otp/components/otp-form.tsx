@@ -1,4 +1,4 @@
-import { PinInput, PinInputField } from '@/components/pin-input'
+
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -7,9 +7,8 @@ import {
   FormItem,
   FormMessage,
 } from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { Separator } from '@/components/ui/separator'
-import { toast } from '@/hooks/use-toast'
+ 
+
 import { cn } from '@/lib/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from '@tanstack/react-router'
@@ -26,7 +25,6 @@ const formSchema = z.object({
 export function OtpForm({ className, ...props }: OtpFormProps) {
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false)
-  const [disabledBtn, setDisabledBtn] = useState(true)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -35,14 +33,7 @@ export function OtpForm({ className, ...props }: OtpFormProps) {
 
   function onSubmit(data: z.infer<typeof formSchema>) {
     setIsLoading(true)
-    toast({
-      title: 'You submitted the following values:',
-      description: (
-        <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
-          <code className='text-white'>{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    })
+    console.log({ data })
 
     setTimeout(() => {
       setIsLoading(false)
@@ -61,30 +52,18 @@ export function OtpForm({ className, ...props }: OtpFormProps) {
               render={({ field }) => (
                 <FormItem className='space-y-1'>
                   <FormControl>
-                    <PinInput
+                    <input
                       {...field}
-                      className='flex h-10 justify-between'
-                      onComplete={() => setDisabledBtn(false)}
-                      onIncomplete={() => setDisabledBtn(true)}
-                    >
-                      {Array.from({ length: 7 }, (_, i) => {
-                        if (i === 3)
-                          return <Separator key={i} orientation='vertical' />
-                        return (
-                          <PinInputField
-                            key={i}
-                            component={Input}
-                            className={`${form.getFieldState('otp').invalid ? 'border-red-500' : ''}`}
-                          />
-                        )
-                      })}
-                    </PinInput>
+                      type='text'
+                      placeholder='Enter your OTP code'
+                      className='border rounded px-3 py-2'
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button className='mt-2' disabled={disabledBtn || isLoading}>
+            <Button className='mt-2' disabled={!form.formState.isValid || isLoading}>
               Verify
             </Button>
           </div>
