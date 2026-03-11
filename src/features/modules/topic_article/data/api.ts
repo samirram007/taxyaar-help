@@ -1,7 +1,7 @@
 import { getData, postData, putData } from "@/utils/dataClient"
 
 
-const API_PATH = "/help_center/topic_articles"
+const API_PATH = "/help_center_topic_articles"
 export async function fetchTopicArticleService() {
     return await getData(API_PATH)
 }

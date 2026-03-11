@@ -15,3 +15,7 @@ export async function storeHelpCenterService(payload: any) {
 export async function updateHelpCenterService(payload: any) {
     return await putData(`${API_PATH}/${payload.id}`, payload)
 }
+
+export async function searchArticleService(searchString: string) {
+    return await getData(`/help_centers_search_article?search=${searchString}`)
+}

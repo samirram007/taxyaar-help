@@ -7,6 +7,7 @@ import { Header } from "./header";
 import { TopNav } from "./top-nav";
 
 
+
 const HeaderComponent: React.FC<{}> = () => {
     return (
         <Header>
@@ -28,23 +29,34 @@ const topNav = [
         href: 'dashboard/overview',
         isActive: true,
         disabled: false,
+        visible: false
+    },
+    {
+        title: 'Help-Center',
+        href: '/dashboard/help-center',
+        isActive: true,
+        disabled: true,
+        visible: true
     },
     {
         title: 'Customers',
         href: '/dashboard/customers',
         isActive: false,
         disabled: true,
+        visible: false
     },
     {
         title: 'Products',
         href: '/dashboard/products',
         isActive: false,
         disabled: true,
+        visible: false
     },
     {
         title: 'Settings',
         href: '/dashboard/settings',
         isActive: false,
         disabled: true,
+        visible: false
     },
 ]
