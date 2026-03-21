@@ -1,29 +1,45 @@
-"use client"
-
-import { Button } from "@/components/ui/button"
+import { Link } from "@tanstack/react-router"
+import { Menu, X } from "lucide-react"
+import { useState } from "react"
 
 export default function Header() {
-  return (
-    <header className="border-b border-border bg-card">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py-4 flex items-center justify-between">
-        <a href="/" className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-            <span className="text-primary-foreground font-bold text-sm">IT</span>
-          </div>
-          <span className="font-semibold text-foreground hidden sm:inline">Taxyaar Help Center</span>
-        </a>
+  const [menuOpen, setMenuOpen] = useState(false)
 
-        <nav className="flex items-center gap-4">
-          <a href="/file-tax-return" className="text-sm text-foreground hover:text-primary transition-colors">
-            File your Tax Return
-          </a>
-          <a href="/submit-request" className="text-sm text-foreground hover:text-primary transition-colors">
-            Submit a request
-          </a>
-          <Button variant="outline" size="sm" asChild>
-            <a href="/sign-in">Sign In</a>
-          </Button>
-        </nav>
+  return (
+    <header className="c-header-w">
+      <div className="mx-auto w-[min(1200px,92%)]">
+        <div className="grid grid-cols-[220px_1fr] items-center gap-6 max-[991px]:grid-cols-1 max-[991px]:gap-2">
+          <div className="c-logo-w">
+            <Link to="/help-center">
+              <img src="/images/logo.png" alt="Taxyaar" />
+            </Link>
+          </div>
+
+          <div className="c-nav-w">
+            <div className="c-nav-bottom">
+              <button
+                type="button"
+                className="c-menu-btn"
+                onClick={() => setMenuOpen((prev) => !prev)}
+                aria-label="Toggle menu"
+              >
+                {menuOpen ? <X size={16} /> : <Menu size={16} />} menu
+              </button>
+
+              <div className={`c-nav-bottom-list ${menuOpen ? 'active' : ''}`}>
+                <ul>
+                  <li><a href="#" onClick={() => setMenuOpen(false)}>File Your Tax Return</a></li>
+                  <li><a href="#" onClick={() => setMenuOpen(false)}>Submit a request</a></li>
+                  <li>
+                    <a href="/sign-in" className="c-btn-1" onClick={() => setMenuOpen(false)}>
+                      <span>Login</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </header>
   )
