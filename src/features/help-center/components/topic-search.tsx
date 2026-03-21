@@ -44,35 +44,36 @@ const TopicSearch = () => {
         setSearchQuery("")
         setShowResults(false)
     }
-    console.log(showResults, searchResults)
     return (
-        <div className="border-b border-border bg-background">
-            <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
-                <div className="relative">
-                    <Search className="absolute left-3 top-3 h-5 w-5 text-muted-foreground" />
+        <section className="search">
+            <div className="mx-auto w-[min(1200px,92%)]">
+                <div className="form-group has-search">
+                    <span className="form-control-feedback">
+                        <Search size={16} />
+                    </span>
                     <input
                         type="text"
-                        placeholder="Search for help..."
+                        className="form-control"
+                        placeholder="Search"
                         value={searchQuery}
                         onChange={(e) => handleSearch(e.target.value)}
                         onFocus={() => searchQuery.length >= 2 && setShowResults(true)}
                         onBlur={() => setTimeout(() => setShowResults(false), 200)}
-                        className="w-full rounded-lg border border-input bg-background pl-10 pr-4 py-2 text-foreground placeholder-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
                     />
 
                     {/* Search Results Dropdown */}
                     {showResults && searchResults.length > 0 && (
-                        <div className="absolute top-full left-0 right-0 mt-2 bg-card border border-border rounded-lg shadow-lg max-h-96 overflow-y-auto z-50">
+                        <div className="search-dropdown">
                             <div className="p-2">
-                                <p className="text-xs text-muted-foreground px-3 py-2">Found {searchResults.length} result{searchResults.length !== 1 ? 's' : ''}</p>
+                                <p className="px-3 py-2 text-xs text-zinc-500">Found {searchResults.length} result{searchResults.length !== 1 ? 's' : ''}</p>
                                 {searchResults.map((result: TopicArticle) => (
                                     <button
                                         key={result.slug}
                                         onClick={() => handleArticleClick(result.slug)}
-                                        className="w-full text-left px-3 py-2 rounded hover:bg-muted transition-colors"
+                                        className="search-item"
                                     >
-                                        <div className="font-medium text-foreground">{result.title}</div>
-                                        <div className="text-xs text-muted-foreground capitalize">{result.slug}</div>
+                                        <div className="font-medium text-zinc-900">{result.title}</div>
+                                        <div className="text-xs capitalize text-zinc-500">{result.slug}</div>
                                     </button>
                                 ))}
                             </div>
@@ -81,14 +82,14 @@ const TopicSearch = () => {
 
                     {/* No Results */}
                     {showResults && searchQuery.length >= 2 && searchResults.length === 0 && (
-                        <div className="absolute top-full left-0 right-0 mt-2 bg-card border border-border rounded-lg shadow-lg p-4 z-50">
-                            <p className="text-sm text-muted-foreground">No results found for "{searchQuery}"</p>
+                        <div className="search-dropdown p-4">
+                            <p className="text-sm text-zinc-500">No results found for "{searchQuery}"</p>
                         </div>
                     )}
                 </div>
             </div>
             {/* <pre>{JSON.stringify(queryResult.data, null, 2)}</pre> */}
-        </div>
+        </section>
     )
 }
 

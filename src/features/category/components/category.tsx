@@ -1,4 +1,4 @@
-"use client"
+
 
 import { Link, useParams } from "@tanstack/react-router";
 import { ChevronRight } from "lucide-react";
