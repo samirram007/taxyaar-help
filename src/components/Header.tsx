@@ -31,9 +31,9 @@ export default function Header() {
                   <li><a href="#" onClick={() => setMenuOpen(false)}>File Your Tax Return</a></li>
                   <li><a href="#" onClick={() => setMenuOpen(false)}>Submit a request</a></li>
                   <li>
-                    <a href="/sign-in" className="c-btn-1" onClick={() => setMenuOpen(false)}>
+                    <Link to="/sign-in" className="c-btn-1" onClick={() => setMenuOpen(false)}>
                       <span>Login</span>
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
