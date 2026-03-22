@@ -11,6 +11,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as HelpCenterRouteImport } from './routes/help-center'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as HelpCenterLayoutRouteImport } from './routes/help-center/_layout'
 import { Route as authSignInRouteImport } from './routes/(auth)/sign-in'
@@ -19,6 +20,7 @@ import { Route as ProtectedUserIndexRouteImport } from './routes/protected/user/
 import { Route as HelpCenterLayoutIndexRouteImport } from './routes/help-center/_layout/index'
 import { Route as CategoriesCategoryIdIndexRouteImport } from './routes/categories/$categoryId/index'
 import { Route as CategoriesCategoryIdArticleIdRouteImport } from './routes/categories/$categoryId/$articleId'
+import { Route as HelpCenterLayoutSubmit_requestIndexRouteImport } from './routes/help-center/_layout/submit_request/index'
 import { Route as HelpCenterLayoutTopic_sectionLayoutRouteImport } from './routes/help-center/_layout/topic_section/_layout'
 import { Route as HelpCenterLayoutTopic_categoryLayoutRouteImport } from './routes/help-center/_layout/topic_category/_layout'
 import { Route as HelpCenterLayoutTopic_articleLayoutRouteImport } from './routes/help-center/_layout/topic_article/_layout'
@@ -29,7 +31,6 @@ import { Route as HelpCenterLayoutTopic_sectionLayoutSlugRouteImport } from './r
 import { Route as HelpCenterLayoutTopic_categoryLayoutSlugRouteImport } from './routes/help-center/_layout/topic_category/_layout/$slug'
 import { Route as HelpCenterLayoutTopic_articleLayoutSlugRouteImport } from './routes/help-center/_layout/topic_article/_layout/$slug'
 
-const HelpCenterRouteImport = createFileRoute('/help-center')()
 const authSigninLazyRouteImport = createFileRoute('/(auth)/signin')()
 const authSignUpLazyRouteImport = createFileRoute('/(auth)/sign-up')()
 const authSignIn2LazyRouteImport = createFileRoute('/(auth)/sign-in-2')()
@@ -140,6 +141,12 @@ const CategoriesCategoryIdArticleIdRoute =
     path: '/categories/$categoryId/$articleId',
     getParentRoute: () => rootRouteImport,
   } as any)
+const HelpCenterLayoutSubmit_requestIndexRoute =
+  HelpCenterLayoutSubmit_requestIndexRouteImport.update({
+    id: '/submit_request/',
+    path: '/submit_request/',
+    getParentRoute: () => HelpCenterLayoutRoute,
+  } as any)
 const HelpCenterLayoutTopic_sectionLayoutRoute =
   HelpCenterLayoutTopic_sectionLayoutRouteImport.update({
     id: '/_layout',
@@ -194,9 +201,9 @@ const HelpCenterLayoutTopic_articleLayoutSlugRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/help-center': typeof HelpCenterLayoutRouteWithChildren
   '/otp': typeof authOtpRoute
   '/sign-in': typeof authSignInRoute
-  '/help-center': typeof HelpCenterLayoutRouteWithChildren
   '/forgot-password': typeof authForgotPasswordLazyRoute
   '/sign-in-2': typeof authSignIn2LazyRoute
   '/sign-up': typeof authSignUpLazyRoute
@@ -208,6 +215,7 @@ export interface FileRoutesByFullPath {
   '/help-center/topic_article': typeof HelpCenterLayoutTopic_articleLayoutRouteWithChildren
   '/help-center/topic_category': typeof HelpCenterLayoutTopic_categoryLayoutRouteWithChildren
   '/help-center/topic_section': typeof HelpCenterLayoutTopic_sectionLayoutRouteWithChildren
+  '/help-center/submit_request': typeof HelpCenterLayoutSubmit_requestIndexRoute
   '/help-center/topic_article/$slug': typeof HelpCenterLayoutTopic_articleLayoutSlugRoute
   '/help-center/topic_category/$slug': typeof HelpCenterLayoutTopic_categoryLayoutSlugRoute
   '/help-center/topic_section/$slug': typeof HelpCenterLayoutTopic_sectionLayoutSlugRoute
@@ -217,9 +225,9 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/help-center': typeof HelpCenterLayoutIndexRoute
   '/otp': typeof authOtpRoute
   '/sign-in': typeof authSignInRoute
-  '/help-center': typeof HelpCenterLayoutIndexRoute
   '/forgot-password': typeof authForgotPasswordLazyRoute
   '/sign-in-2': typeof authSignIn2LazyRoute
   '/sign-up': typeof authSignUpLazyRoute
@@ -230,6 +238,7 @@ export interface FileRoutesByTo {
   '/help-center/topic_article': typeof HelpCenterLayoutTopic_articleLayoutIndexRoute
   '/help-center/topic_category': typeof HelpCenterLayoutTopic_categoryLayoutIndexRoute
   '/help-center/topic_section': typeof HelpCenterLayoutTopic_sectionLayoutIndexRoute
+  '/help-center/submit_request': typeof HelpCenterLayoutSubmit_requestIndexRoute
   '/help-center/topic_article/$slug': typeof HelpCenterLayoutTopic_articleLayoutSlugRoute
   '/help-center/topic_category/$slug': typeof HelpCenterLayoutTopic_categoryLayoutSlugRoute
   '/help-center/topic_section/$slug': typeof HelpCenterLayoutTopic_sectionLayoutSlugRoute
@@ -237,9 +246,9 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/help-center': typeof HelpCenterRouteWithChildren
   '/(auth)/otp': typeof authOtpRoute
   '/(auth)/sign-in': typeof authSignInRoute
-  '/help-center': typeof HelpCenterRouteWithChildren
   '/help-center/_layout': typeof HelpCenterLayoutRouteWithChildren
   '/(auth)/forgot-password': typeof authForgotPasswordLazyRoute
   '/(auth)/sign-in-2': typeof authSignIn2LazyRoute
@@ -255,6 +264,7 @@ export interface FileRoutesById {
   '/help-center/_layout/topic_category/_layout': typeof HelpCenterLayoutTopic_categoryLayoutRouteWithChildren
   '/help-center/_layout/topic_section': typeof HelpCenterLayoutTopic_sectionRouteWithChildren
   '/help-center/_layout/topic_section/_layout': typeof HelpCenterLayoutTopic_sectionLayoutRouteWithChildren
+  '/help-center/_layout/submit_request/': typeof HelpCenterLayoutSubmit_requestIndexRoute
   '/help-center/_layout/topic_article/_layout/$slug': typeof HelpCenterLayoutTopic_articleLayoutSlugRoute
   '/help-center/_layout/topic_category/_layout/$slug': typeof HelpCenterLayoutTopic_categoryLayoutSlugRoute
   '/help-center/_layout/topic_section/_layout/$slug': typeof HelpCenterLayoutTopic_sectionLayoutSlugRoute
@@ -266,9 +276,9 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/help-center'
     | '/otp'
     | '/sign-in'
-    | '/help-center'
     | '/forgot-password'
     | '/sign-in-2'
     | '/sign-up'
@@ -280,6 +290,7 @@ export interface FileRouteTypes {
     | '/help-center/topic_article'
     | '/help-center/topic_category'
     | '/help-center/topic_section'
+    | '/help-center/submit_request'
     | '/help-center/topic_article/$slug'
     | '/help-center/topic_category/$slug'
     | '/help-center/topic_section/$slug'
@@ -289,9 +300,9 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/help-center'
     | '/otp'
     | '/sign-in'
-    | '/help-center'
     | '/forgot-password'
     | '/sign-in-2'
     | '/sign-up'
@@ -302,15 +313,16 @@ export interface FileRouteTypes {
     | '/help-center/topic_article'
     | '/help-center/topic_category'
     | '/help-center/topic_section'
+    | '/help-center/submit_request'
     | '/help-center/topic_article/$slug'
     | '/help-center/topic_category/$slug'
     | '/help-center/topic_section/$slug'
   id:
     | '__root__'
     | '/'
+    | '/help-center'
     | '/(auth)/otp'
     | '/(auth)/sign-in'
-    | '/help-center'
     | '/help-center/_layout'
     | '/(auth)/forgot-password'
     | '/(auth)/sign-in-2'
@@ -326,6 +338,7 @@ export interface FileRouteTypes {
     | '/help-center/_layout/topic_category/_layout'
     | '/help-center/_layout/topic_section'
     | '/help-center/_layout/topic_section/_layout'
+    | '/help-center/_layout/submit_request/'
     | '/help-center/_layout/topic_article/_layout/$slug'
     | '/help-center/_layout/topic_category/_layout/$slug'
     | '/help-center/_layout/topic_section/_layout/$slug'
@@ -336,9 +349,9 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  HelpCenterRoute: typeof HelpCenterRouteWithChildren
   authOtpRoute: typeof authOtpRoute
   authSignInRoute: typeof authSignInRoute
-  HelpCenterRoute: typeof HelpCenterRouteWithChildren
   authForgotPasswordLazyRoute: typeof authForgotPasswordLazyRoute
   authSignIn2LazyRoute: typeof authSignIn2LazyRoute
   authSignUpLazyRoute: typeof authSignUpLazyRoute
@@ -394,7 +407,7 @@ declare module '@tanstack/react-router' {
     }
     '/help-center/_layout': {
       id: '/help-center/_layout'
-      path: '/help-center'
+      path: ''
       fullPath: '/help-center'
       preLoaderRoute: typeof HelpCenterLayoutRouteImport
       parentRoute: typeof HelpCenterRoute
@@ -461,6 +474,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/categories/$categoryId/$articleId'
       preLoaderRoute: typeof CategoriesCategoryIdArticleIdRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/help-center/_layout/submit_request/': {
+      id: '/help-center/_layout/submit_request/'
+      path: '/submit_request'
+      fullPath: '/help-center/submit_request'
+      preLoaderRoute: typeof HelpCenterLayoutSubmit_requestIndexRouteImport
+      parentRoute: typeof HelpCenterLayoutRoute
     }
     '/help-center/_layout/topic_section/_layout': {
       id: '/help-center/_layout/topic_section/_layout'
@@ -632,6 +652,7 @@ interface HelpCenterLayoutRouteChildren {
   HelpCenterLayoutTopic_articleRoute: typeof HelpCenterLayoutTopic_articleRouteWithChildren
   HelpCenterLayoutTopic_categoryRoute: typeof HelpCenterLayoutTopic_categoryRouteWithChildren
   HelpCenterLayoutTopic_sectionRoute: typeof HelpCenterLayoutTopic_sectionRouteWithChildren
+  HelpCenterLayoutSubmit_requestIndexRoute: typeof HelpCenterLayoutSubmit_requestIndexRoute
 }
 
 const HelpCenterLayoutRouteChildren: HelpCenterLayoutRouteChildren = {
@@ -642,6 +663,8 @@ const HelpCenterLayoutRouteChildren: HelpCenterLayoutRouteChildren = {
     HelpCenterLayoutTopic_categoryRouteWithChildren,
   HelpCenterLayoutTopic_sectionRoute:
     HelpCenterLayoutTopic_sectionRouteWithChildren,
+  HelpCenterLayoutSubmit_requestIndexRoute:
+    HelpCenterLayoutSubmit_requestIndexRoute,
 }
 
 const HelpCenterLayoutRouteWithChildren =
@@ -661,9 +684,9 @@ const HelpCenterRouteWithChildren = HelpCenterRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  HelpCenterRoute: HelpCenterRouteWithChildren,
   authOtpRoute: authOtpRoute,
   authSignInRoute: authSignInRoute,
-  HelpCenterRoute: HelpCenterRouteWithChildren,
   authForgotPasswordLazyRoute: authForgotPasswordLazyRoute,
   authSignIn2LazyRoute: authSignIn2LazyRoute,
   authSignUpLazyRoute: authSignUpLazyRoute,
