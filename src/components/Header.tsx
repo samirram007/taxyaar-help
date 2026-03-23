@@ -3,7 +3,11 @@ import { Menu, X } from "lucide-react"
 import { useState } from "react"
 
 export default function Header() {
-  const [menuOpen, setMenuOpen] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const onClickToTaxYaar = () =>{
+    window.location.href=import.meta.env.VITE_TAXYAAR_SITE
+  }
 
   return (
     <header className="c-header-w">
@@ -28,8 +32,8 @@ export default function Header() {
 
               <div className={`c-nav-bottom-list ${menuOpen ? 'active' : ''}`}>
                 <ul>
-                  <li><a href="#" onClick={() => setMenuOpen(false)}>File Your Tax Return</a></li>
-                  <li><a href="#" onClick={() => setMenuOpen(false)}>Submit a request</a></li>
+                  <li><div className="text-white cursor-pointer text-sm font-bold" onClick={onClickToTaxYaar}>File Your Tax Return</div></li>
+                  <li><a href="#" className="text-sm" onClick={() => setMenuOpen(false)}>Submit a request</a></li>
                   <li>
                     <Link to="/sign-in" className="c-btn-1" onClick={() => setMenuOpen(false)}>
                       <span>Login</span>
