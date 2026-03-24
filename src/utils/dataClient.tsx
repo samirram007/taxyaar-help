@@ -3,6 +3,7 @@ import { toast } from "sonner";
 
 import axiosClient from "@/utils/axios-client";
 import { removeEmptyStrings } from "./removeEmptyStrings";
+import type { AxiosHeaders } from "axios";
 // import { removeEmptyStrings } from "./removeEmptyStrings";
 
 export const getData = async (apiPath: string) => {
@@ -17,6 +18,21 @@ export const getData = async (apiPath: string) => {
         })
 }
 export const postData = async (apiPath: string, payload: object) => {
+    // console.log(apiPath, removeEmptyStrings(payload))
+    return await axiosClient.post(apiPath, removeEmptyStrings(payload))
+        .then(response => {
+            successHandler(response)
+            return response.data;
+        })
+        .catch((err) => {
+            // console.log("Error", err)
+            errorHandler(err)
+            // throw err
+
+        })
+}
+
+export const postMultiPartData = async (apiPath: string, payload: object) => {
     // console.log(apiPath, removeEmptyStrings(payload))
     return await axiosClient.post(apiPath, removeEmptyStrings(payload))
         .then(response => {

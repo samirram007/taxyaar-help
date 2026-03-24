@@ -33,7 +33,14 @@ export default function Header() {
               <div className={`c-nav-bottom-list ${menuOpen ? 'active' : ''}`}>
                 <ul>
                   <li><div className="text-white cursor-pointer text-sm font-bold" onClick={onClickToTaxYaar}>File Your Tax Return</div></li>
-                  <li><a href="#" className="text-sm" onClick={() => setMenuOpen(false)}>Submit a request</a></li>
+                  <li>
+                    <Link
+                      to="/help-center/submit_request"
+                      className="text-sm" onClick={() => setMenuOpen(false)}
+                    >
+                      Submit a request
+                    </Link>
+                  </li>
                   <li>
                     <Link to="/sign-in" className="c-btn-1" onClick={() => setMenuOpen(false)}>
                       <span>Login</span>
