@@ -10,18 +10,21 @@ import {
 
 function SubmitRequestBreadcrumb() {
   return (
-    <Breadcrumb className="mb-6 sm:mb-8">
-      <BreadcrumbList className="text-[11px] text-zinc-500">
+    <Breadcrumb className="mb-2! sm:mb-0!">
+      <BreadcrumbList className="text-[11px]! text-zinc-500">
         <BreadcrumbItem>
           <BreadcrumbLink asChild>
-            <Link to="/help-center" className="font-medium text-sky-700">
+            <Link
+              to="/help-center"
+              className="font-medium text-sky-700 hover:text-sky-800"
+            >
               TAXYAAR Help Center
             </Link>
           </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator className="text-zinc-400" />
         <BreadcrumbItem>
-          <BreadcrumbPage className="text-[11px] text-zinc-500">
+          <BreadcrumbPage className="text-[11px]! text-zinc-500">
             Submit a request
           </BreadcrumbPage>
         </BreadcrumbItem>

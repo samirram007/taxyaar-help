@@ -1,13 +1,12 @@
-import { Link } from "@tanstack/react-router"
-import { Menu, X } from "lucide-react"
-import { useState } from "react"
+import { Link } from '@tanstack/react-router'
+import { Menu, X } from 'lucide-react'
+import { useState } from 'react'
+import { useAuth } from '@/features/auth/contexts/AuthContext'
+import { ProfileDropdown } from '@/components/profile-dropdown'
 
 export default function Header() {
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  const onClickToTaxYaar = () =>{
-    window.location.href=import.meta.env.VITE_TAXYAAR_SITE
-  }
+  const [menuOpen, setMenuOpen] = useState(false)
+  const { isAuthenticated } = useAuth()
 
   return (
     <header className="c-header-w">
@@ -32,19 +31,38 @@ export default function Header() {
 
               <div className={`c-nav-bottom-list ${menuOpen ? 'active' : ''}`}>
                 <ul>
-                  <li><div className="text-white cursor-pointer text-sm font-bold" onClick={onClickToTaxYaar}>File Your Tax Return</div></li>
+                  <li>
+                    <a
+                      href={import.meta.env.VITE_TAXYAAR_SITE}
+                      className="text-sm"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      File Your Tax Return
+                    </a>
+                  </li>
                   <li>
                     <Link
                       to="/help-center/submit_request"
-                      className="text-sm" onClick={() => setMenuOpen(false)}
+                      className="text-sm"
+                      onClick={() => setMenuOpen(false)}
                     >
                       Submit a request
                     </Link>
                   </li>
                   <li>
-                    <Link to="/sign-in" className="c-btn-1" onClick={() => setMenuOpen(false)}>
-                      <span>Login</span>
-                    </Link>
+                    {isAuthenticated ? (
+                      <div onClick={() => setMenuOpen(false)}>
+                        <ProfileDropdown />
+                      </div>
+                    ) : (
+                      <Link
+                        to="/sign-in"
+                        className="c-btn-1"
+                        onClick={() => setMenuOpen(false)}
+                      >
+                        <span>Login</span>
+                      </Link>
+                    )}
                   </li>
                 </ul>
               </div>

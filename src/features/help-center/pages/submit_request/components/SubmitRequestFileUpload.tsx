@@ -1,39 +1,39 @@
 'use client'
 
-import { useFormContext } from "react-hook-form";
-import type { ChangeEvent } from "react";
+import { useFormContext } from 'react-hook-form'
+import type { ChangeEvent } from 'react'
 
 type Props = {
-  name: string;
-  inputId: string;
-};
+  name: string
+  inputId: string
+}
 
 function SubmitRequestFileUpload({ name, inputId }: Props) {
-  const { setValue, watch } = useFormContext();
+  const { setValue, watch } = useFormContext()
 
-  const file: File | undefined = watch(name);
-  const fileName = file?.name || "";
+  const file: File | undefined = watch(name)
+  const fileName = file?.name || ''
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files?.[0];
+    const selectedFile = e.target.files?.[0]
 
     setValue(name, selectedFile, {
       shouldValidate: true,
       shouldDirty: true,
       shouldTouch: true,
-    });
-  };
+    })
+  }
 
   const handleRemove = () => {
     setValue(name, undefined, {
       shouldValidate: true,
       shouldDirty: true,
       shouldTouch: true,
-    });
-  };
+    })
+  }
 
   return (
-    <div className="rounded-[2px] border border-zinc-300 bg-white px-3 py-2.5 text-center">
+    <div className="rounded-[2px] border border-zinc-300 bg-white px-3! py-2.5! text-center">
       <input
         id={inputId}
         type="file"
@@ -41,13 +41,16 @@ function SubmitRequestFileUpload({ name, inputId }: Props) {
         onChange={handleChange}
       />
 
-      <label htmlFor={inputId} className="block cursor-pointer text-xs">
+      <label
+        htmlFor={inputId}
+        className="block cursor-pointer text-[12px]! leading-5"
+      >
         <span className="font-medium text-blue-600">Add file</span>
-        <span className="pl-1 text-zinc-500"> or drop file here</span>
+        <span className="pl-1! text-zinc-500">or drop files here</span>
       </label>
 
       {fileName && (
-        <div className="mt-1 flex items-center justify-center gap-2 text-[11px] text-zinc-500">
+        <div className="mt-1! flex items-center justify-center gap-2 text-[11px]! text-zinc-500">
           <span>Selected: {fileName}</span>
 
           <button
@@ -60,7 +63,7 @@ function SubmitRequestFileUpload({ name, inputId }: Props) {
         </div>
       )}
     </div>
-  );
+  )
 }
 
-export default SubmitRequestFileUpload;
+export default SubmitRequestFileUpload

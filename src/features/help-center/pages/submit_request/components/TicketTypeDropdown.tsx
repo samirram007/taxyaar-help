@@ -1,11 +1,11 @@
-"use client";
+'use client'
 
 import {
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form'
 
 import {
   Select,
@@ -13,48 +13,48 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from '@/components/ui/select'
 
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from "@/components/ui/hover-card";
+} from '@/components/ui/hover-card'
 
-import { capitalizeAllWords } from "@/utils/removeEmptyStrings";
-import { useQuery } from "@tanstack/react-query";
-import { InfoIcon } from "lucide-react";
-import { useMemo } from "react";
-import type { UseFormReturn } from "react-hook-form";
+import { capitalizeAllWords } from '@/utils/removeEmptyStrings'
+import { useQuery } from '@tanstack/react-query'
+import { InfoIcon } from 'lucide-react'
+import { useMemo } from 'react'
+import type { UseFormReturn } from 'react-hook-form'
 
-import { fetchTicketTypeService } from "../data/api";
-import type { TicketForm, TicketType } from "../data/schema";
+import { fetchTicketTypeService } from '../data/api'
+import type { TicketForm, TicketType } from '../data/schema'
 
 type Props = {
-  form: UseFormReturn<TicketForm>;
-};
+  form: UseFormReturn<TicketForm>
+}
 
 const TicketTypeDropdown = ({ form }: Props) => {
   const { data: ticketTypeList, isLoading } = useQuery({
-    queryKey: ["ticketTypes"],
+    queryKey: ['ticketTypes'],
     queryFn: fetchTicketTypeService,
-  });
+  })
 
-  const ticketTypeId = form.watch("ticketTypeId");
+  const ticketTypeId = form.watch('ticketTypeId')
 
   const selectedTicketType: (TicketType & { description?: string }) | null =
     useMemo(() => {
-      if (!ticketTypeList?.data || !ticketTypeId) return null;
+      if (!ticketTypeList?.data || !ticketTypeId) return null
 
       return (
         ticketTypeList.data.find(
-          (type: TicketType) => type.id === Number(ticketTypeId)
+          (type: TicketType) => type.id === Number(ticketTypeId),
         ) || null
-      );
-    }, [ticketTypeId, ticketTypeList?.data]);
+      )
+    }, [ticketTypeId, ticketTypeList?.data])
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>
   }
 
   return (
@@ -62,19 +62,21 @@ const TicketTypeDropdown = ({ form }: Props) => {
       control={form.control}
       name="ticketTypeId"
       render={({ field }) => (
-        <FormItem className="grid grid-rows-2 items-start gap-x-1 gap-y-1">
-          <FormLabel className="col-span-2 text-right mt-3">
+        <FormItem className="grid grid-cols-1 items-start gap-2">
+          <FormLabel className="text-[12px]! font-medium text-zinc-700">
             Ticket Type
           </FormLabel>
 
-          <div className="w-full flex gap-2 items-center col-span-4">
+          <div className="w-full">
             <Select
               value={field.value ? String(field.value) : undefined} // ⚠️ important
               onValueChange={(val) => field.onChange(Number(val))} // convert to number
             >
-              <SelectTrigger className="w-11/12">
-                <SelectValue placeholder="Select a ticket type" />
-              </SelectTrigger>
+              <div className="w-full rounded-[2px] border! border-zinc-300! bg-white!">
+                <SelectTrigger className="h-9 w-full rounded-[2px] border-0! bg-transparent px-3! text-[12px]! shadow-none! focus-visible:ring-0!">
+                  <SelectValue placeholder="Select a ticket type" />
+                </SelectTrigger>
+              </div>
 
               <SelectContent>
                 {ticketTypeList?.data?.map((type: TicketType) => (
@@ -98,7 +100,7 @@ const TicketTypeDropdown = ({ form }: Props) => {
                     {selectedTicketType.name}
                   </div>
 
-                  {"description" in selectedTicketType &&
+                  {'description' in selectedTicketType &&
                     selectedTicketType.description && (
                       <div className="text-sm">
                         {selectedTicketType.description}
@@ -109,11 +111,11 @@ const TicketTypeDropdown = ({ form }: Props) => {
             )}
           </div>
 
-          <FormMessage className="col-span-4 col-start-3" />
+          <FormMessage className="mt-0! text-[11px]!" />
         </FormItem>
       )}
     />
-  );
-};
+  )
+}
 
-export default TicketTypeDropdown;
+export default TicketTypeDropdown

@@ -1,5 +1,5 @@
-import { PasswordInput } from '@/components/password-input';
-import { Button } from '@/components/ui/button';
+import { PasswordInput } from '@/components/password-input'
+import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
@@ -7,18 +7,17 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { cn } from '@/lib/utils';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { IconBrandFacebook, IconBrandGithub } from '@tabler/icons-react';
-import { Link, useRouter } from '@tanstack/react-router';
-import { type HTMLAttributes } from 'react';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { useAuth } from '../../contexts/AuthContext';
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { cn } from '@/lib/utils'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Link, useRouter } from '@tanstack/react-router'
+import { type HTMLAttributes } from 'react'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { useAuth } from '../../contexts/AuthContext'
 
-type UserAuthFormProps = HTMLAttributes<HTMLDivElement>;
+type UserAuthFormProps = HTMLAttributes<HTMLDivElement>
 
 const formSchema = z.object({
   email: z
@@ -49,38 +48,34 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   })
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
-    // setIsLoading(true)
     await login(data)
-      .then(() => router.invalidate())
-      .catch((error) => {
-        console.error("Login failed:...........", error)
-
-        // throw redirect({
-        //   to: '/sign-in',
-        // })
-        // handle error here
+      .then(() => {
+        router.navigate({ to: '/help-center' })
       })
-    // eslint-disable-next-line no-console
-    // console.log(data)
-
-    // setTimeout(() => {
-    //   setIsLoading(false)
-    // }, 3000)
+      .catch((error) => {
+        console.error('Login failed:...........', error)
+      })
   }
 
   return (
-    <div className={cn('grid gap-6', className)} {...props}>
+    <div className={cn('grid! gap-4!', className)} {...props}>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className='grid gap-2'>
+          <div className="grid! gap-4!">
             <FormField
               control={form.control}
-              name='email'
+              name="email"
               render={({ field }) => (
-                <FormItem className='space-y-1'>
-                  <FormLabel>Email</FormLabel>
+                <FormItem className="space-y-1!">
+                  <FormLabel className="text-sm! font-medium! text-slate-600!">
+                    Your email
+                  </FormLabel>
                   <FormControl>
-                    <Input placeholder='name@example.com' {...field} />
+                    <Input
+                      placeholder=""
+                      className="h-11! rounded-sm! border-slate-300! bg-white! text-sm!"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -88,58 +83,37 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             />
             <FormField
               control={form.control}
-              name='password'
+              name="password"
               render={({ field }) => (
-                <FormItem className='space-y-1'>
-                  <div className='flex items-center justify-between'>
-                    <FormLabel>Password</FormLabel>
+                <FormItem className="space-y-1!">
+                  <div className="flex! items-center! justify-between!">
+                    <FormLabel className="text-sm! font-medium! text-slate-600!">
+                      Password
+                    </FormLabel>
                     <Link
-                      to='/forgot-password'
-                      className='text-sm font-medium text-muted-foreground hover:opacity-75'
+                      to="/forgot-password"
+                      className="text-sm! font-medium! text-sky-600! hover:opacity-80!"
                     >
-                      Forgot password?
+                      Forgot Password?
                     </Link>
                   </div>
                   <FormControl>
-                    <PasswordInput placeholder='********' {...field} />
+                    <PasswordInput
+                      placeholder=""
+                      className="h-11!  "
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button className='mt-2' disabled={isLoading}>
-              Login
+            <Button
+              className="mt-2! h-11! w-full! rounded-sm! bg-blue-600! text-base! font-semibold! text-white! hover:bg-blue-700!"
+              disabled={isLoading}
+            >
+              Continue
             </Button>
-
-            <div className='relative my-2'>
-              <div className='absolute inset-0 flex items-center'>
-                <span className='w-full border-t' />
-              </div>
-              <div className='hidden relative flex justify-center text-xs uppercase'>
-                <span className='bg-background px-2 text-muted-foreground'>
-                  Or continue with
-                </span>
-              </div>
-            </div>
-
-            <div className='flex items-center flex-row flex-nowrap gap-2 hidden'>
-              <Button
-                variant='outline'
-                className='w-1/2'
-                type='button'
-                disabled={isLoading}
-              >
-                <IconBrandGithub className='h-4 w-4' /> GitHub
-              </Button>
-              <Button
-                variant='outline'
-                className='w-1/2'
-                type='button'
-                disabled={isLoading}
-              >
-                <IconBrandFacebook className='h-4 w-4' /> Facebook
-              </Button>
-            </div>
           </div>
         </form>
       </Form>

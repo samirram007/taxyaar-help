@@ -1,11 +1,11 @@
-"use client";
+'use client'
 
 import {
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form'
 
 import {
   Select,
@@ -13,20 +13,20 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from '@/components/ui/select'
 
-import type { UseFormReturn } from "react-hook-form";
-import type { TicketForm } from "../data/schema";
+import type { UseFormReturn } from 'react-hook-form'
+import type { TicketForm } from '../data/schema'
 
 type Props = {
-  form: UseFormReturn<TicketForm>;
-};
+  form: UseFormReturn<TicketForm>
+}
 
 const PLATFORM_OPTIONS = [
-  { label: "iOS", value: "ios" },
-  { label: "Android", value: "android" },
-  { label: "Web", value: "web" },
-];
+  { label: 'iOS', value: 'ios' },
+  { label: 'App', value: 'app' },
+  { label: 'Web', value: 'web' },
+]
 
 const PlatformDropdown = ({ form }: Props) => {
   return (
@@ -34,19 +34,21 @@ const PlatformDropdown = ({ form }: Props) => {
       control={form.control}
       name="platform"
       render={({ field }) => (
-        <FormItem className="grid grid-rows-2 items-start gap-x-4 gap-y-1">
-          <FormLabel className="col-span-2 text-right mt-3">
-            Platform
+        <FormItem className="grid gap-2">
+          <FormLabel className="text-[12px]! font-medium text-zinc-700">
+            Are you Filing through Web / App?
           </FormLabel>
 
-          <div className="col-span-4">
+          <div>
             <Select
               value={field.value || undefined} // ⚠️ important
               onValueChange={field.onChange}
             >
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder="Select platform" />
-              </SelectTrigger>
+              <div className="w-full rounded-[2px] border! border-zinc-300! bg-white!">
+                <SelectTrigger className="h-9 w-full rounded-[2px] border-0! bg-transparent px-3! text-[12px]! shadow-none! focus-visible:ring-0!">
+                  <SelectValue placeholder="Select platform" />
+                </SelectTrigger>
+              </div>
 
               <SelectContent>
                 {PLATFORM_OPTIONS.map((item) => (
@@ -58,11 +60,11 @@ const PlatformDropdown = ({ form }: Props) => {
             </Select>
           </div>
 
-          <FormMessage className="col-span-4 col-start-3" />
+          <FormMessage className="mt-0! text-[11px]!" />
         </FormItem>
       )}
     />
-  );
-};
+  )
+}
 
-export default PlatformDropdown;
+export default PlatformDropdown

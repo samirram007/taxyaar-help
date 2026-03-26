@@ -167,6 +167,11 @@
   display: none;
 }
 
+[data-slot="dropdown-menu-content"],
+[role="menu"] {
+  z-index: 1000 !important;
+}
+
 /* ------------------- Banner ------------------- */
 .help-ban {
   background-color: var(--lightpurple);

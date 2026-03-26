@@ -1,28 +1,34 @@
-import { Bold, Code2, Italic, Link2, List, ListOrdered, Quote, Underline } from 'lucide-react'
+import { Image, Link2, List, ListOrdered, Quote } from 'lucide-react'
 
 const editorActions = [
-  { label: 'Bold', icon: Bold },
-  { label: 'Italic', icon: Italic },
-  { label: 'Underline', icon: Underline },
-  { label: 'List', icon: List },
-  { label: 'Numbered List', icon: ListOrdered },
-  { label: 'Code', icon: Code2 },
-  { label: 'Link', icon: Link2 },
-  { label: 'Quote', icon: Quote },
-]
+  { label: 'Text', type: 'text', content: 'T' },
+  { label: 'Bold', type: 'text', content: 'B' },
+  { label: 'Italic', type: 'text', content: '/' },
+  { label: 'Bullet list', type: 'icon', icon: List },
+  { label: 'Numbered list', type: 'icon', icon: ListOrdered },
+  { label: 'Image', type: 'icon', icon: Image },
+  { label: 'Link', type: 'icon', icon: Link2 },
+  { label: 'Quote', type: 'icon', icon: Quote },
+] as const
 
 function SubmitRequestEditorToolbar() {
   return (
-    <div className="flex h-8 flex-wrap items-center gap-1 border-b border-zinc-200 bg-white px-2">
-      {editorActions.map(({ label, icon: Icon }) => (
+    <div className="flex h-8 flex-wrap items-center gap-1 border-b border-zinc-200 bg-[#fafafa] px-2!">
+      {editorActions.map((action) => (
         <button
-          key={label}
+          key={action.label}
           type="button"
-          title={label}
-          className="inline-flex h-6 w-6 items-center justify-center rounded text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-800"
-          aria-label={label}
+          title={action.label}
+          className="inline-flex h-6 min-w-6 items-center justify-center rounded px-1! text-zinc-600 transition-colors hover:bg-zinc-100 hover:text-zinc-800"
+          aria-label={action.label}
         >
-          <Icon className="h-3 w-3" />
+          {action.type === 'text' ? (
+            <span className="text-[11px]! font-semibold leading-none">
+              {action.content}
+            </span>
+          ) : (
+            <action.icon className="h-3 w-3" />
+          )}
         </button>
       ))}
     </div>

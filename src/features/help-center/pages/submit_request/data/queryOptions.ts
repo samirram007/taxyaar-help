@@ -1,4 +1,4 @@
-import { queryOptions, useMutation, useQueryClient } from "@tanstack/react-query"
+import { queryOptions, useMutation } from "@tanstack/react-query"
 import { fetchTicketTypeService, storeTicketMasterService } from "./api"
 import type { TicketForm } from "./schema"
 import { toast } from "sonner"
