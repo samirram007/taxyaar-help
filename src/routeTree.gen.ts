@@ -13,6 +13,9 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as HelpCenterRouteImport } from './routes/help-center'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as RequestsIndexRouteImport } from './routes/requests/index'
+import { Route as ContactDetailsIndexRouteImport } from './routes/contact-details/index'
+import { Route as ActivitiesIndexRouteImport } from './routes/activities/index'
 import { Route as HelpCenterLayoutRouteImport } from './routes/help-center/_layout'
 import { Route as authSignInRouteImport } from './routes/(auth)/sign-in'
 import { Route as authOtpRouteImport } from './routes/(auth)/otp'
@@ -55,6 +58,21 @@ const HelpCenterRoute = HelpCenterRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RequestsIndexRoute = RequestsIndexRouteImport.update({
+  id: '/requests/',
+  path: '/requests/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactDetailsIndexRoute = ContactDetailsIndexRouteImport.update({
+  id: '/contact-details/',
+  path: '/contact-details/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ActivitiesIndexRoute = ActivitiesIndexRouteImport.update({
+  id: '/activities/',
+  path: '/activities/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const authSigninLazyRoute = authSigninLazyRouteImport
@@ -208,6 +226,9 @@ export interface FileRoutesByFullPath {
   '/sign-in-2': typeof authSignIn2LazyRoute
   '/sign-up': typeof authSignUpLazyRoute
   '/signin': typeof authSigninLazyRoute
+  '/activities': typeof ActivitiesIndexRoute
+  '/contact-details': typeof ContactDetailsIndexRoute
+  '/requests': typeof RequestsIndexRoute
   '/categories/$categoryId/$articleId': typeof CategoriesCategoryIdArticleIdRoute
   '/categories/$categoryId': typeof CategoriesCategoryIdIndexRoute
   '/help-center/': typeof HelpCenterLayoutIndexRoute
@@ -232,6 +253,9 @@ export interface FileRoutesByTo {
   '/sign-in-2': typeof authSignIn2LazyRoute
   '/sign-up': typeof authSignUpLazyRoute
   '/signin': typeof authSigninLazyRoute
+  '/activities': typeof ActivitiesIndexRoute
+  '/contact-details': typeof ContactDetailsIndexRoute
+  '/requests': typeof RequestsIndexRoute
   '/categories/$categoryId/$articleId': typeof CategoriesCategoryIdArticleIdRoute
   '/categories/$categoryId': typeof CategoriesCategoryIdIndexRoute
   '/protected/user': typeof ProtectedUserIndexRoute
@@ -254,6 +278,9 @@ export interface FileRoutesById {
   '/(auth)/sign-in-2': typeof authSignIn2LazyRoute
   '/(auth)/sign-up': typeof authSignUpLazyRoute
   '/(auth)/signin': typeof authSigninLazyRoute
+  '/activities/': typeof ActivitiesIndexRoute
+  '/contact-details/': typeof ContactDetailsIndexRoute
+  '/requests/': typeof RequestsIndexRoute
   '/categories/$categoryId/$articleId': typeof CategoriesCategoryIdArticleIdRoute
   '/categories/$categoryId/': typeof CategoriesCategoryIdIndexRoute
   '/help-center/_layout/': typeof HelpCenterLayoutIndexRoute
@@ -283,6 +310,9 @@ export interface FileRouteTypes {
     | '/sign-in-2'
     | '/sign-up'
     | '/signin'
+    | '/activities'
+    | '/contact-details'
+    | '/requests'
     | '/categories/$categoryId/$articleId'
     | '/categories/$categoryId'
     | '/help-center/'
@@ -307,6 +337,9 @@ export interface FileRouteTypes {
     | '/sign-in-2'
     | '/sign-up'
     | '/signin'
+    | '/activities'
+    | '/contact-details'
+    | '/requests'
     | '/categories/$categoryId/$articleId'
     | '/categories/$categoryId'
     | '/protected/user'
@@ -328,6 +361,9 @@ export interface FileRouteTypes {
     | '/(auth)/sign-in-2'
     | '/(auth)/sign-up'
     | '/(auth)/signin'
+    | '/activities/'
+    | '/contact-details/'
+    | '/requests/'
     | '/categories/$categoryId/$articleId'
     | '/categories/$categoryId/'
     | '/help-center/_layout/'
@@ -356,6 +392,9 @@ export interface RootRouteChildren {
   authSignIn2LazyRoute: typeof authSignIn2LazyRoute
   authSignUpLazyRoute: typeof authSignUpLazyRoute
   authSigninLazyRoute: typeof authSigninLazyRoute
+  ActivitiesIndexRoute: typeof ActivitiesIndexRoute
+  ContactDetailsIndexRoute: typeof ContactDetailsIndexRoute
+  RequestsIndexRoute: typeof RequestsIndexRoute
   CategoriesCategoryIdArticleIdRoute: typeof CategoriesCategoryIdArticleIdRoute
   CategoriesCategoryIdIndexRoute: typeof CategoriesCategoryIdIndexRoute
   ProtectedUserIndexRoute: typeof ProtectedUserIndexRoute
@@ -375,6 +414,27 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/requests/': {
+      id: '/requests/'
+      path: '/requests'
+      fullPath: '/requests'
+      preLoaderRoute: typeof RequestsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact-details/': {
+      id: '/contact-details/'
+      path: '/contact-details'
+      fullPath: '/contact-details'
+      preLoaderRoute: typeof ContactDetailsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/activities/': {
+      id: '/activities/'
+      path: '/activities'
+      fullPath: '/activities'
+      preLoaderRoute: typeof ActivitiesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/(auth)/signin': {
@@ -691,6 +751,9 @@ const rootRouteChildren: RootRouteChildren = {
   authSignIn2LazyRoute: authSignIn2LazyRoute,
   authSignUpLazyRoute: authSignUpLazyRoute,
   authSigninLazyRoute: authSigninLazyRoute,
+  ActivitiesIndexRoute: ActivitiesIndexRoute,
+  ContactDetailsIndexRoute: ContactDetailsIndexRoute,
+  RequestsIndexRoute: RequestsIndexRoute,
   CategoriesCategoryIdArticleIdRoute: CategoriesCategoryIdArticleIdRoute,
   CategoriesCategoryIdIndexRoute: CategoriesCategoryIdIndexRoute,
   ProtectedUserIndexRoute: ProtectedUserIndexRoute,

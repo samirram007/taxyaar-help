@@ -1,71 +1,71 @@
-import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa"
+import { FaFacebookF, FaInstagram, FaTwitter } from 'react-icons/fa'
 
 const footerGroups = [
   {
-    title: "TAXYAAR",
+    title: 'TAXYAAR',
     links: [
-      "TAXYAAR Home",
-      "Support",
-      "Track Refund",
-      "About Us",
-      "Privacy Policy",
-      "Terms of Use",
-      "Pricing",
-      "Team",
-      "Branding",
-      "Refer & earn",
-      "Share with friends",
+      'TAXYAAR Home',
+      'Support',
+      'Track Refund',
+      'About Us',
+      'Privacy Policy',
+      'Terms of Use',
+      'Pricing',
+      'Team',
+      'Branding',
+      'Refer & earn',
+      'Share with friends',
     ],
   },
   {
-    title: "Important Tools",
+    title: 'Important Tools',
     links: [
-      "Capital Gain Calculator",
-      "Shares & Securities Calculator",
-      "Land & Building Calculator",
-      "Crypto Tax Calculator",
-      "Advance Tax Estimator",
-      "Tax Calculator 2025-26",
-      "Generate Form 12BB",
-      "Generate Rent Receipt",
-      "Check Refund Status",
-      "Find IFSC Code",
-      "HRA Calculator",
-      "EMI Calculator",
-      "BMI Calculator",
+      'Capital Gain Calculator',
+      'Shares & Securities Calculator',
+      'Land & Building Calculator',
+      'Crypto Tax Calculator',
+      'Advance Tax Estimator',
+      'Tax Calculator 2025-26',
+      'Generate Form 12BB',
+      'Generate Rent Receipt',
+      'Check Refund Status',
+      'Find IFSC Code',
+      'HRA Calculator',
+      'EMI Calculator',
+      'BMI Calculator',
     ],
   },
   {
-    title: "Corporate",
+    title: 'Corporate',
     links: [
-      "Form-16 Software",
-      "Digital Signature",
-      "TDS Software",
-      "TDS Outsourcing",
-      "STACOS",
-      "Lexlegis",
-      "Teamnest",
-      "Partner with myITreturn",
+      'Form-16 Software',
+      'Digital Signature',
+      'TDS Software',
+      'TDS Outsourcing',
+      'STACOS',
+      'Lexlegis',
+      'Teamnest',
+      'Partner with myITreturn',
     ],
   },
   {
-    title: "Other Links",
+    title: 'Other Links',
     links: [
-      "Assisted Service",
-      "Notice Assistance",
-      "Notice Section 139(9)",
-      "Notice Section 143(1)",
-      "Notice Section 133(6)",
-      "Notice Section 245",
-      "Last date to file Income tax return",
-      "Tax Planning",
+      'Assisted Service',
+      'Notice Assistance',
+      'Notice Section 139(9)',
+      'Notice Section 143(1)',
+      'Notice Section 133(6)',
+      'Notice Section 245',
+      'Last date to file Income tax return',
+      'Tax Planning',
     ],
   },
 ]
 
 export default function Footer() {
   return (
-    <footer className="c-footer-w">
+    <footer className="c-footer-w border-t border-slate-200 bg-slate-50 py-8">
       <div className="mx-auto w-[min(1200px,92%)]">
         <div className="grid grid-cols-[260px_1fr] gap-6 max-[767px]:grid-cols-1">
           <div className="c-footer-left mb-3">
@@ -75,9 +75,21 @@ export default function Footer() {
               </a>
             </div>
             <ul>
-              <li><a href="#" aria-label="Facebook"><FaFacebookF /></a></li>
-              <li><a href="#" aria-label="Twitter"><FaTwitter /></a></li>
-              <li><a href="#" aria-label="Instagram"><FaInstagram /></a></li>
+              <li>
+                <a href="#" aria-label="Facebook">
+                  <FaFacebookF />
+                </a>
+              </li>
+              <li>
+                <a href="#" aria-label="Twitter">
+                  <FaTwitter />
+                </a>
+              </li>
+              <li>
+                <a href="#" aria-label="Instagram">
+                  <FaInstagram />
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -98,15 +110,22 @@ export default function Footer() {
         </div>
 
         <div className="c-footer-bottom">
-          <p>2025-26 Copyright Taxyaar Pvt. Ltd. <span>All Rights Reserved</span></p>
+          <p>
+            2025-26 Copyright Taxyaar Pvt. Ltd. <span>All Rights Reserved</span>
+          </p>
         </div>
 
         <p className="disclaimer">
-          Disclaimer: File your Income Tax Return online with Taxyaar. E-filing through myitreturn is quick, safe, and hassle-free.
-          Simply upload your Form-16 and complete your filing in just 15 minutes. <a href="#">taxyaar.com</a> supports salary income,
-          interest from banks and other sources, capital gains, income from house property, as well as business and professional income.
-          With the Taxyaar website, you can file your return right from your smartphone. Begin filing for free and get the assurance of maximum
-          refund, guaranteed. We are the smartest and most reliable platform for individuals to e-file their returns.
+          Disclaimer: File your Income Tax Return online with Taxyaar. E-filing
+          through myitreturn is quick, safe, and hassle-free. Simply upload your
+          Form-16 and complete your filing in just 15 minutes.{' '}
+          <a href="#">taxyaar.com</a> supports salary income, interest from
+          banks and other sources, capital gains, income from house property, as
+          well as business and professional income. With the Taxyaar website,
+          you can file your return right from your smartphone. Begin filing for
+          free and get the assurance of maximum refund, guaranteed. We are the
+          smartest and most reliable platform for individuals to e-file their
+          returns.
         </p>
       </div>
     </footer>

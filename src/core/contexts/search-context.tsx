@@ -1,4 +1,3 @@
-
 import { CommandMenu } from '@/layouts/components/command-menu'
 import React from 'react'
 
@@ -11,9 +10,10 @@ const SearchContext = React.createContext<SearchContextType | null>(null)
 
 interface Props {
   children: React.ReactNode
+  showCommandMenu?: boolean
 }
 
-export function SearchProvider({ children }: Props) {
+export function SearchProvider({ children, showCommandMenu = true }: Props) {
   const [open, setOpen] = React.useState(false)
 
   React.useEffect(() => {
@@ -30,7 +30,7 @@ export function SearchProvider({ children }: Props) {
   return (
     <SearchContext.Provider value={{ open, setOpen }}>
       {children}
-      <CommandMenu />
+      {showCommandMenu && <CommandMenu />}
     </SearchContext.Provider>
   )
 }
