@@ -37,7 +37,7 @@ export const ticketFormSchema = z.object({
         .string(),
 
     file: z
-        .instanceof(File)
+        .any()
         .optional(),
 });
 

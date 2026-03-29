@@ -42,6 +42,10 @@ function SubmitRequestForm() {
   })
 
   const onSubmit = (values: TicketForm) => {
+
+    // console.log("values", values);
+    // return;
+
     mutate(values, {
       onSuccess: () => {
         form.reset()
@@ -113,7 +117,6 @@ function SubmitRequestForm() {
           )}
         />
 
-        {/* MOBILE */}
         <FormInputField
           type="text"
           form={form}

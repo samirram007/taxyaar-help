@@ -35,7 +35,11 @@ export const postData = async (apiPath: string, payload: object) => {
 export const postMultiPartData = async (apiPath: string, payload: object) => {
   // console.log(apiPath, removeEmptyStrings(payload))
   return await axiosClient
-    .post(apiPath, removeEmptyStrings(payload))
+    .post(apiPath, removeEmptyStrings(payload), {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
+    })
     .then((response) => {
       successHandler(response)
       return response.data
