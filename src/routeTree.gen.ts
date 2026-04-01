@@ -15,7 +15,6 @@ import { Route as HelpCenterRouteImport } from './routes/help-center'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as RequestsIndexRouteImport } from './routes/requests/index'
 import { Route as ContactDetailsIndexRouteImport } from './routes/contact-details/index'
-import { Route as ActivitiesIndexRouteImport } from './routes/activities/index'
 import { Route as HelpCenterLayoutRouteImport } from './routes/help-center/_layout'
 import { Route as authSignInRouteImport } from './routes/(auth)/sign-in'
 import { Route as authOtpRouteImport } from './routes/(auth)/otp'
@@ -27,12 +26,15 @@ import { Route as HelpCenterLayoutSubmit_requestIndexRouteImport } from './route
 import { Route as HelpCenterLayoutTopic_sectionLayoutRouteImport } from './routes/help-center/_layout/topic_section/_layout'
 import { Route as HelpCenterLayoutTopic_categoryLayoutRouteImport } from './routes/help-center/_layout/topic_category/_layout'
 import { Route as HelpCenterLayoutTopic_articleLayoutRouteImport } from './routes/help-center/_layout/topic_article/_layout'
+import { Route as HelpCenterLayoutActivitiesLayoutRouteImport } from './routes/help-center/_layout/activities/_layout'
 import { Route as HelpCenterLayoutTopic_sectionLayoutIndexRouteImport } from './routes/help-center/_layout/topic_section/_layout/index'
 import { Route as HelpCenterLayoutTopic_categoryLayoutIndexRouteImport } from './routes/help-center/_layout/topic_category/_layout/index'
 import { Route as HelpCenterLayoutTopic_articleLayoutIndexRouteImport } from './routes/help-center/_layout/topic_article/_layout/index'
 import { Route as HelpCenterLayoutTopic_sectionLayoutSlugRouteImport } from './routes/help-center/_layout/topic_section/_layout/$slug'
 import { Route as HelpCenterLayoutTopic_categoryLayoutSlugRouteImport } from './routes/help-center/_layout/topic_category/_layout/$slug'
 import { Route as HelpCenterLayoutTopic_articleLayoutSlugRouteImport } from './routes/help-center/_layout/topic_article/_layout/$slug'
+import { Route as HelpCenterLayoutActivitiesLayoutSubscriptionsIndexRouteImport } from './routes/help-center/_layout/activities/_layout/subscriptions/index'
+import { Route as HelpCenterLayoutActivitiesLayoutCommentsIndexRouteImport } from './routes/help-center/_layout/activities/_layout/comments/index'
 
 const authSigninLazyRouteImport = createFileRoute('/(auth)/signin')()
 const authSignUpLazyRouteImport = createFileRoute('/(auth)/sign-up')()
@@ -48,6 +50,9 @@ const HelpCenterLayoutTopic_categoryRouteImport = createFileRoute(
 )()
 const HelpCenterLayoutTopic_articleRouteImport = createFileRoute(
   '/help-center/_layout/topic_article',
+)()
+const HelpCenterLayoutActivitiesRouteImport = createFileRoute(
+  '/help-center/_layout/activities',
 )()
 
 const HelpCenterRoute = HelpCenterRouteImport.update({
@@ -68,11 +73,6 @@ const RequestsIndexRoute = RequestsIndexRouteImport.update({
 const ContactDetailsIndexRoute = ContactDetailsIndexRouteImport.update({
   id: '/contact-details/',
   path: '/contact-details/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ActivitiesIndexRoute = ActivitiesIndexRouteImport.update({
-  id: '/activities/',
-  path: '/activities/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const authSigninLazyRoute = authSigninLazyRouteImport
@@ -137,6 +137,12 @@ const HelpCenterLayoutTopic_articleRoute =
     path: '/topic_article',
     getParentRoute: () => HelpCenterLayoutRoute,
   } as any)
+const HelpCenterLayoutActivitiesRoute =
+  HelpCenterLayoutActivitiesRouteImport.update({
+    id: '/activities',
+    path: '/activities',
+    getParentRoute: () => HelpCenterLayoutRoute,
+  } as any)
 const ProtectedUserIndexRoute = ProtectedUserIndexRouteImport.update({
   id: '/protected/user/',
   path: '/protected/user/',
@@ -180,6 +186,11 @@ const HelpCenterLayoutTopic_articleLayoutRoute =
     id: '/_layout',
     getParentRoute: () => HelpCenterLayoutTopic_articleRoute,
   } as any)
+const HelpCenterLayoutActivitiesLayoutRoute =
+  HelpCenterLayoutActivitiesLayoutRouteImport.update({
+    id: '/_layout',
+    getParentRoute: () => HelpCenterLayoutActivitiesRoute,
+  } as any)
 const HelpCenterLayoutTopic_sectionLayoutIndexRoute =
   HelpCenterLayoutTopic_sectionLayoutIndexRouteImport.update({
     id: '/',
@@ -216,6 +227,18 @@ const HelpCenterLayoutTopic_articleLayoutSlugRoute =
     path: '/$slug',
     getParentRoute: () => HelpCenterLayoutTopic_articleLayoutRoute,
   } as any)
+const HelpCenterLayoutActivitiesLayoutSubscriptionsIndexRoute =
+  HelpCenterLayoutActivitiesLayoutSubscriptionsIndexRouteImport.update({
+    id: '/subscriptions/',
+    path: '/subscriptions/',
+    getParentRoute: () => HelpCenterLayoutActivitiesLayoutRoute,
+  } as any)
+const HelpCenterLayoutActivitiesLayoutCommentsIndexRoute =
+  HelpCenterLayoutActivitiesLayoutCommentsIndexRouteImport.update({
+    id: '/comments/',
+    path: '/comments/',
+    getParentRoute: () => HelpCenterLayoutActivitiesLayoutRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -226,13 +249,13 @@ export interface FileRoutesByFullPath {
   '/sign-in-2': typeof authSignIn2LazyRoute
   '/sign-up': typeof authSignUpLazyRoute
   '/signin': typeof authSigninLazyRoute
-  '/activities': typeof ActivitiesIndexRoute
   '/contact-details': typeof ContactDetailsIndexRoute
   '/requests': typeof RequestsIndexRoute
   '/categories/$categoryId/$articleId': typeof CategoriesCategoryIdArticleIdRoute
   '/categories/$categoryId': typeof CategoriesCategoryIdIndexRoute
   '/help-center/': typeof HelpCenterLayoutIndexRoute
   '/protected/user': typeof ProtectedUserIndexRoute
+  '/help-center/activities': typeof HelpCenterLayoutActivitiesLayoutRouteWithChildren
   '/help-center/topic_article': typeof HelpCenterLayoutTopic_articleLayoutRouteWithChildren
   '/help-center/topic_category': typeof HelpCenterLayoutTopic_categoryLayoutRouteWithChildren
   '/help-center/topic_section': typeof HelpCenterLayoutTopic_sectionLayoutRouteWithChildren
@@ -243,6 +266,8 @@ export interface FileRoutesByFullPath {
   '/help-center/topic_article/': typeof HelpCenterLayoutTopic_articleLayoutIndexRoute
   '/help-center/topic_category/': typeof HelpCenterLayoutTopic_categoryLayoutIndexRoute
   '/help-center/topic_section/': typeof HelpCenterLayoutTopic_sectionLayoutIndexRoute
+  '/help-center/activities/comments': typeof HelpCenterLayoutActivitiesLayoutCommentsIndexRoute
+  '/help-center/activities/subscriptions': typeof HelpCenterLayoutActivitiesLayoutSubscriptionsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -253,12 +278,12 @@ export interface FileRoutesByTo {
   '/sign-in-2': typeof authSignIn2LazyRoute
   '/sign-up': typeof authSignUpLazyRoute
   '/signin': typeof authSigninLazyRoute
-  '/activities': typeof ActivitiesIndexRoute
   '/contact-details': typeof ContactDetailsIndexRoute
   '/requests': typeof RequestsIndexRoute
   '/categories/$categoryId/$articleId': typeof CategoriesCategoryIdArticleIdRoute
   '/categories/$categoryId': typeof CategoriesCategoryIdIndexRoute
   '/protected/user': typeof ProtectedUserIndexRoute
+  '/help-center/activities': typeof HelpCenterLayoutActivitiesLayoutRouteWithChildren
   '/help-center/topic_article': typeof HelpCenterLayoutTopic_articleLayoutIndexRoute
   '/help-center/topic_category': typeof HelpCenterLayoutTopic_categoryLayoutIndexRoute
   '/help-center/topic_section': typeof HelpCenterLayoutTopic_sectionLayoutIndexRoute
@@ -266,6 +291,8 @@ export interface FileRoutesByTo {
   '/help-center/topic_article/$slug': typeof HelpCenterLayoutTopic_articleLayoutSlugRoute
   '/help-center/topic_category/$slug': typeof HelpCenterLayoutTopic_categoryLayoutSlugRoute
   '/help-center/topic_section/$slug': typeof HelpCenterLayoutTopic_sectionLayoutSlugRoute
+  '/help-center/activities/comments': typeof HelpCenterLayoutActivitiesLayoutCommentsIndexRoute
+  '/help-center/activities/subscriptions': typeof HelpCenterLayoutActivitiesLayoutSubscriptionsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -278,13 +305,14 @@ export interface FileRoutesById {
   '/(auth)/sign-in-2': typeof authSignIn2LazyRoute
   '/(auth)/sign-up': typeof authSignUpLazyRoute
   '/(auth)/signin': typeof authSigninLazyRoute
-  '/activities/': typeof ActivitiesIndexRoute
   '/contact-details/': typeof ContactDetailsIndexRoute
   '/requests/': typeof RequestsIndexRoute
   '/categories/$categoryId/$articleId': typeof CategoriesCategoryIdArticleIdRoute
   '/categories/$categoryId/': typeof CategoriesCategoryIdIndexRoute
   '/help-center/_layout/': typeof HelpCenterLayoutIndexRoute
   '/protected/user/': typeof ProtectedUserIndexRoute
+  '/help-center/_layout/activities': typeof HelpCenterLayoutActivitiesRouteWithChildren
+  '/help-center/_layout/activities/_layout': typeof HelpCenterLayoutActivitiesLayoutRouteWithChildren
   '/help-center/_layout/topic_article': typeof HelpCenterLayoutTopic_articleRouteWithChildren
   '/help-center/_layout/topic_article/_layout': typeof HelpCenterLayoutTopic_articleLayoutRouteWithChildren
   '/help-center/_layout/topic_category': typeof HelpCenterLayoutTopic_categoryRouteWithChildren
@@ -298,6 +326,8 @@ export interface FileRoutesById {
   '/help-center/_layout/topic_article/_layout/': typeof HelpCenterLayoutTopic_articleLayoutIndexRoute
   '/help-center/_layout/topic_category/_layout/': typeof HelpCenterLayoutTopic_categoryLayoutIndexRoute
   '/help-center/_layout/topic_section/_layout/': typeof HelpCenterLayoutTopic_sectionLayoutIndexRoute
+  '/help-center/_layout/activities/_layout/comments/': typeof HelpCenterLayoutActivitiesLayoutCommentsIndexRoute
+  '/help-center/_layout/activities/_layout/subscriptions/': typeof HelpCenterLayoutActivitiesLayoutSubscriptionsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -310,13 +340,13 @@ export interface FileRouteTypes {
     | '/sign-in-2'
     | '/sign-up'
     | '/signin'
-    | '/activities'
     | '/contact-details'
     | '/requests'
     | '/categories/$categoryId/$articleId'
     | '/categories/$categoryId'
     | '/help-center/'
     | '/protected/user'
+    | '/help-center/activities'
     | '/help-center/topic_article'
     | '/help-center/topic_category'
     | '/help-center/topic_section'
@@ -327,6 +357,8 @@ export interface FileRouteTypes {
     | '/help-center/topic_article/'
     | '/help-center/topic_category/'
     | '/help-center/topic_section/'
+    | '/help-center/activities/comments'
+    | '/help-center/activities/subscriptions'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -337,12 +369,12 @@ export interface FileRouteTypes {
     | '/sign-in-2'
     | '/sign-up'
     | '/signin'
-    | '/activities'
     | '/contact-details'
     | '/requests'
     | '/categories/$categoryId/$articleId'
     | '/categories/$categoryId'
     | '/protected/user'
+    | '/help-center/activities'
     | '/help-center/topic_article'
     | '/help-center/topic_category'
     | '/help-center/topic_section'
@@ -350,6 +382,8 @@ export interface FileRouteTypes {
     | '/help-center/topic_article/$slug'
     | '/help-center/topic_category/$slug'
     | '/help-center/topic_section/$slug'
+    | '/help-center/activities/comments'
+    | '/help-center/activities/subscriptions'
   id:
     | '__root__'
     | '/'
@@ -361,13 +395,14 @@ export interface FileRouteTypes {
     | '/(auth)/sign-in-2'
     | '/(auth)/sign-up'
     | '/(auth)/signin'
-    | '/activities/'
     | '/contact-details/'
     | '/requests/'
     | '/categories/$categoryId/$articleId'
     | '/categories/$categoryId/'
     | '/help-center/_layout/'
     | '/protected/user/'
+    | '/help-center/_layout/activities'
+    | '/help-center/_layout/activities/_layout'
     | '/help-center/_layout/topic_article'
     | '/help-center/_layout/topic_article/_layout'
     | '/help-center/_layout/topic_category'
@@ -381,6 +416,8 @@ export interface FileRouteTypes {
     | '/help-center/_layout/topic_article/_layout/'
     | '/help-center/_layout/topic_category/_layout/'
     | '/help-center/_layout/topic_section/_layout/'
+    | '/help-center/_layout/activities/_layout/comments/'
+    | '/help-center/_layout/activities/_layout/subscriptions/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -392,7 +429,6 @@ export interface RootRouteChildren {
   authSignIn2LazyRoute: typeof authSignIn2LazyRoute
   authSignUpLazyRoute: typeof authSignUpLazyRoute
   authSigninLazyRoute: typeof authSigninLazyRoute
-  ActivitiesIndexRoute: typeof ActivitiesIndexRoute
   ContactDetailsIndexRoute: typeof ContactDetailsIndexRoute
   RequestsIndexRoute: typeof RequestsIndexRoute
   CategoriesCategoryIdArticleIdRoute: typeof CategoriesCategoryIdArticleIdRoute
@@ -428,13 +464,6 @@ declare module '@tanstack/react-router' {
       path: '/contact-details'
       fullPath: '/contact-details'
       preLoaderRoute: typeof ContactDetailsIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/activities/': {
-      id: '/activities/'
-      path: '/activities'
-      fullPath: '/activities'
-      preLoaderRoute: typeof ActivitiesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/(auth)/signin': {
@@ -507,6 +536,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HelpCenterLayoutTopic_articleRouteImport
       parentRoute: typeof HelpCenterLayoutRoute
     }
+    '/help-center/_layout/activities': {
+      id: '/help-center/_layout/activities'
+      path: '/activities'
+      fullPath: '/help-center/activities'
+      preLoaderRoute: typeof HelpCenterLayoutActivitiesRouteImport
+      parentRoute: typeof HelpCenterLayoutRoute
+    }
     '/protected/user/': {
       id: '/protected/user/'
       path: '/protected/user'
@@ -563,6 +599,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HelpCenterLayoutTopic_articleLayoutRouteImport
       parentRoute: typeof HelpCenterLayoutTopic_articleRoute
     }
+    '/help-center/_layout/activities/_layout': {
+      id: '/help-center/_layout/activities/_layout'
+      path: '/activities'
+      fullPath: '/help-center/activities'
+      preLoaderRoute: typeof HelpCenterLayoutActivitiesLayoutRouteImport
+      parentRoute: typeof HelpCenterLayoutActivitiesRoute
+    }
     '/help-center/_layout/topic_section/_layout/': {
       id: '/help-center/_layout/topic_section/_layout/'
       path: '/'
@@ -605,8 +648,55 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HelpCenterLayoutTopic_articleLayoutSlugRouteImport
       parentRoute: typeof HelpCenterLayoutTopic_articleLayoutRoute
     }
+    '/help-center/_layout/activities/_layout/subscriptions/': {
+      id: '/help-center/_layout/activities/_layout/subscriptions/'
+      path: '/subscriptions'
+      fullPath: '/help-center/activities/subscriptions'
+      preLoaderRoute: typeof HelpCenterLayoutActivitiesLayoutSubscriptionsIndexRouteImport
+      parentRoute: typeof HelpCenterLayoutActivitiesLayoutRoute
+    }
+    '/help-center/_layout/activities/_layout/comments/': {
+      id: '/help-center/_layout/activities/_layout/comments/'
+      path: '/comments'
+      fullPath: '/help-center/activities/comments'
+      preLoaderRoute: typeof HelpCenterLayoutActivitiesLayoutCommentsIndexRouteImport
+      parentRoute: typeof HelpCenterLayoutActivitiesLayoutRoute
+    }
   }
 }
+
+interface HelpCenterLayoutActivitiesLayoutRouteChildren {
+  HelpCenterLayoutActivitiesLayoutCommentsIndexRoute: typeof HelpCenterLayoutActivitiesLayoutCommentsIndexRoute
+  HelpCenterLayoutActivitiesLayoutSubscriptionsIndexRoute: typeof HelpCenterLayoutActivitiesLayoutSubscriptionsIndexRoute
+}
+
+const HelpCenterLayoutActivitiesLayoutRouteChildren: HelpCenterLayoutActivitiesLayoutRouteChildren =
+  {
+    HelpCenterLayoutActivitiesLayoutCommentsIndexRoute:
+      HelpCenterLayoutActivitiesLayoutCommentsIndexRoute,
+    HelpCenterLayoutActivitiesLayoutSubscriptionsIndexRoute:
+      HelpCenterLayoutActivitiesLayoutSubscriptionsIndexRoute,
+  }
+
+const HelpCenterLayoutActivitiesLayoutRouteWithChildren =
+  HelpCenterLayoutActivitiesLayoutRoute._addFileChildren(
+    HelpCenterLayoutActivitiesLayoutRouteChildren,
+  )
+
+interface HelpCenterLayoutActivitiesRouteChildren {
+  HelpCenterLayoutActivitiesLayoutRoute: typeof HelpCenterLayoutActivitiesLayoutRouteWithChildren
+}
+
+const HelpCenterLayoutActivitiesRouteChildren: HelpCenterLayoutActivitiesRouteChildren =
+  {
+    HelpCenterLayoutActivitiesLayoutRoute:
+      HelpCenterLayoutActivitiesLayoutRouteWithChildren,
+  }
+
+const HelpCenterLayoutActivitiesRouteWithChildren =
+  HelpCenterLayoutActivitiesRoute._addFileChildren(
+    HelpCenterLayoutActivitiesRouteChildren,
+  )
 
 interface HelpCenterLayoutTopic_articleLayoutRouteChildren {
   HelpCenterLayoutTopic_articleLayoutSlugRoute: typeof HelpCenterLayoutTopic_articleLayoutSlugRoute
@@ -709,6 +799,7 @@ const HelpCenterLayoutTopic_sectionRouteWithChildren =
 
 interface HelpCenterLayoutRouteChildren {
   HelpCenterLayoutIndexRoute: typeof HelpCenterLayoutIndexRoute
+  HelpCenterLayoutActivitiesRoute: typeof HelpCenterLayoutActivitiesRouteWithChildren
   HelpCenterLayoutTopic_articleRoute: typeof HelpCenterLayoutTopic_articleRouteWithChildren
   HelpCenterLayoutTopic_categoryRoute: typeof HelpCenterLayoutTopic_categoryRouteWithChildren
   HelpCenterLayoutTopic_sectionRoute: typeof HelpCenterLayoutTopic_sectionRouteWithChildren
@@ -717,6 +808,7 @@ interface HelpCenterLayoutRouteChildren {
 
 const HelpCenterLayoutRouteChildren: HelpCenterLayoutRouteChildren = {
   HelpCenterLayoutIndexRoute: HelpCenterLayoutIndexRoute,
+  HelpCenterLayoutActivitiesRoute: HelpCenterLayoutActivitiesRouteWithChildren,
   HelpCenterLayoutTopic_articleRoute:
     HelpCenterLayoutTopic_articleRouteWithChildren,
   HelpCenterLayoutTopic_categoryRoute:
@@ -751,7 +843,6 @@ const rootRouteChildren: RootRouteChildren = {
   authSignIn2LazyRoute: authSignIn2LazyRoute,
   authSignUpLazyRoute: authSignUpLazyRoute,
   authSigninLazyRoute: authSigninLazyRoute,
-  ActivitiesIndexRoute: ActivitiesIndexRoute,
   ContactDetailsIndexRoute: ContactDetailsIndexRoute,
   RequestsIndexRoute: RequestsIndexRoute,
   CategoriesCategoryIdArticleIdRoute: CategoriesCategoryIdArticleIdRoute,

@@ -20,7 +20,7 @@ export type TicketType = z.infer<typeof ticketTypeSchema>;
 export const ticketFormSchema = z.object({
     email: z.string().email(),
 
-    ticketTypeId: z.number(),
+    typeId: z.number(),
 
     platform: z.enum(["web", "app"]), // better than free string
 

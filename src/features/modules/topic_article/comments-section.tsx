@@ -12,19 +12,15 @@ import {
   Image,
   Code2,
 } from 'lucide-react'
+import { useTopicCommentMutation } from '@/features/help-center/pages/contribution/data/queryOptions'
+import type { TopicComment } from '@/features/help-center/pages/contribution/data/schema'
+import { useQueryClient } from '@tanstack/react-query'
 
-interface Comment {
-  id: number
-  author: string
-  content: string
-  timestamp: string
-  likes: number
-}
 
 interface CommentsSectionProps {
   articleId: number | null | undefined
   isAuthenticated: boolean
-  comments?: Comment[]
+  comments?: TopicComment[]
 }
 
 export function CommentsSection({
@@ -32,18 +28,30 @@ export function CommentsSection({
   isAuthenticated,
   comments = [],
 }: CommentsSectionProps) {
-  const [commentText, setCommentText] = useState('')
-  const [sortBy, setSortBy] = useState('newest')
+  const [commentText, setCommentText] = useState('');
+  const [sortBy, setSortBy] = useState('newest');
+  const { mutate } = useTopicCommentMutation();
+
+  const queryClient = useQueryClient();
 
   if (!articleId) {
     return null
   }
 
   const handleSubmitComment = () => {
-    if (commentText.trim()) {
-      console.log('Submitting comment:', commentText)
-      setCommentText('')
+    if (commentText.length === 0) {
+      return;
     }
+
+    mutate({
+      comment: commentText.trim(),
+      articleId: articleId
+    }, {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["topicArticle"] });
+        setCommentText("");
+      }
+    });
   }
 
   return (
@@ -86,18 +94,18 @@ export function CommentsSection({
                     <div className="flex items-center justify-between gap-2">
                       <div className="flex items-center gap-2">
                         <span className="font-semibold text-sm">
-                          {comment.author}
+                          {comment.name}
                         </span>
                         <span className="text-xs text-muted-foreground">
-                          {comment.timestamp}
+                          {comment.createdAt}
                         </span>
                       </div>
                       <span className="text-sm font-medium text-muted-foreground">
-                        {comment.likes > 0 ? `-${comment.likes}` : ''}
+                        {/* {comment.likes > 0 ? `-${comment.likes}` : ''} */}
                       </span>
                     </div>
                     <p className="text-sm mt-2 text-foreground">
-                      {comment.content}
+                      {comment.comment}
                     </p>
                     <div className="flex items-center gap-2 mt-3">
                       <button className="p-1 hover:bg-muted rounded">

@@ -40,7 +40,7 @@ const TicketTypeDropdown = ({ form }: Props) => {
     queryFn: fetchTicketTypeService,
   })
 
-  const ticketTypeId = form.watch('ticketTypeId')
+  const ticketTypeId = form.watch('typeId')
 
   const selectedTicketType: (TicketType & { description?: string }) | null =
     useMemo(() => {
@@ -60,7 +60,7 @@ const TicketTypeDropdown = ({ form }: Props) => {
   return (
     <FormField
       control={form.control}
-      name="ticketTypeId"
+      name="typeId"
       render={({ field }) => (
         <FormItem className="grid grid-cols-1 items-start gap-2">
           <FormLabel className="text-[12px]! font-medium text-zinc-700">

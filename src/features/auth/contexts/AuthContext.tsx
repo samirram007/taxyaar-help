@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         const response = await loginService({ email, password })
         if (response?.status === 'success') { await fetchProfile(); }
         else {
-            flushSync(() => { setUser(null); })
+            flushSync(() => { setUser(null); });
         }
         setIsLoading(false);
     }, [])

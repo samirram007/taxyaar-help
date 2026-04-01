@@ -21,8 +21,8 @@ interface Props {
 }
 
 export default function TopicArticleProvider({ children }: Props) {
-    const [open, setOpen] = useDialogState<TopicArticleDialogType>(null)
-    const [currentRow, setCurrentRow] = useState<TopicArticle | null>(null)
+    const [open, setOpen] = useDialogState<TopicArticleDialogType>(null);
+    const [currentRow, setCurrentRow] = useState<TopicArticle | null>(null);
 
 
     return (

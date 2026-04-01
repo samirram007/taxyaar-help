@@ -12,15 +12,17 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { useAuth } from '@/features/auth/contexts/AuthContext'
-import { Link } from '@tanstack/react-router'
+import { Link, useNavigate } from '@tanstack/react-router'
 import { ProfileEditModal } from '@/components/profile-edit-modal'
 
 export function ProfileDropdown() {
-  const auth = useAuth()
+  const auth = useAuth();
+  const router = useNavigate();
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false)
 
   const handleLogout = async () => {
-    await auth.logout()
+    await auth.logout();
+    router({ to: '/' })
   }
   return (
     <>
@@ -32,10 +34,10 @@ export function ProfileDropdown() {
               <AvatarFallback>
                 {auth.user?.name
                   ? auth.user.name
-                      .split(' ')
-                      .map((n) => n[0])
-                      .slice(0, 2)
-                      .join('')
+                    .split(' ')
+                    .map((n) => n[0])
+                    .slice(0, 2)
+                    .join('')
                   : auth.user?.email
                     ? auth.user.email.slice(0, 2).toUpperCase()
                     : 'US'}
@@ -72,7 +74,7 @@ export function ProfileDropdown() {
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
-              <Link to="/activities">
+              <Link to="/help-center/activities/comments">
                 Activities
                 <DropdownMenuShortcut>⇧⌘A</DropdownMenuShortcut>
               </Link>

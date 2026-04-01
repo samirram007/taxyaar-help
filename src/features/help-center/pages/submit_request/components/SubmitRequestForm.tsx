@@ -31,7 +31,7 @@ function SubmitRequestForm() {
     resolver: zodResolver(ticketFormSchema) as any,
     defaultValues: {
       email: '',
-      ticketTypeId: 0,
+      typeId: 0,
       platform: 'web',
       pan: '',
       subject: '',

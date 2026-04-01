@@ -3,6 +3,7 @@ import { TrueFalseSchema } from '@/types/true-false';
 import { z } from 'zod';
 import { topicSectionSchema } from '../../topic_section/data/schema';
 import { userSchema } from '../../user/data/schema';
+import { topicCommentSchema } from '@/features/help-center/pages/contribution/data/schema';
 
 
 export const relatedArticleSchema = z.object({
@@ -24,6 +25,7 @@ export const topicArticleSchema = z.object({
   content: z.string(),
   topicSectionId: z.number().int().positive(),
   topicSection: z.lazy(() => topicSectionSchema).nullish(),
+  comments: z.lazy(() => z.array(topicCommentSchema)).nullish(),
   relatedArticles: z.lazy(() => z.array(relatedArticleSchema)).nullish(),
   createdBy: z.number().int().positive().nullish(),
   updatedBy: z.number().int().positive().nullish(),
